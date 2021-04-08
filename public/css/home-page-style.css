@@ -1,14 +1,26 @@
-body{
+body {
   background-color: white;
+  text-align: center;
 }
+
+img,
+.btn-group {
+  padding-top: 2rem;
+}
+
+button a,
+button a:hover {
+  color: white;
+}
+
 .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
-.btn-primary{
-  background-color: #4CAF50;
+.btn-primary {
+  background-color: #4caf50;
 }
 
 .container {
