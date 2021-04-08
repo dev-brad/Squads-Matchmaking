@@ -163,6 +163,56 @@ async function findPMatch(duos, trios, squads, casual, ranked, competitions, exh
 
     if (result) {
         //remove this console  log
+        console.log(result);
+        return result;
+    } else {
+        return {};
+    }
+
+}
+
+async function findFMatch() {
+    let promise = new Promise((resolve, reject) => {
+
+        const query = //enter info here// .where({ fortniteName: { $nin: [null, ""] }});
+        query.find(function (err, fortniteMatches) {
+            if (!err) {
+                resolve(fortniteMatches);
+            } else {
+                console.log(err);
+            }
+        });
+    });
+
+    let result = await promise;
+
+    if (result) {
+        //remove this console  log
+        console.log(results);
+        return result;
+    } else {
+        return {};
+    }
+
+}
+
+async function findAMatch() {
+    let promise = new Promise((resolve, reject) => {
+
+        const query = //enter info here// .where({ apexName: { $nin: [null, ""] }});
+            query.find(function (err, apexMatches) {
+                if (!err) {
+                    resolve(apexMatches);
+                } else {
+                    console.log(err);
+                }
+            });
+    });
+
+    let result = await promise;
+
+    if (result) {
+        //remove this console  log
         console.log(results);
         return result;
     } else {
