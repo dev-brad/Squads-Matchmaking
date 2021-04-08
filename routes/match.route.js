@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const matchController = require('../controllers/matchController');
+const crud = require(__dirname + "./../crud.js");
 
 // !!!!!!!!!!!!!!
 // The array below is for testing only -- it should be removed when match queries are working 
