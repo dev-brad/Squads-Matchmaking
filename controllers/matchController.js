@@ -11,23 +11,26 @@ exports.rank_matches = async function(userStats, userPreferences, gameMatches, g
         for (const match of gameMatches) {
             let preferenceMatchScore = get_preference_match_score(userPreferences, match);
             let gameMatchScore;
+            let gameName;
 
             switch (game) {
                 case "Fortnite":
                     gameMatchScore = get_fortnite_match_score(userStats, match);
+                    gameName = match.fortniteName;
                     break;
 
                 case "Apex Legends":
                     gameMatchScore = get_apex_match_score(userStats, match);
+                    gameName = match.apexName;
                     break;
             }
             
             let totalMatchScore = preferenceMatchScore - gameMatchScore;
 
-            MatchScores.push({squadsName: match.squadsName, 
-                                    preferenceMatchScore: preferenceMatchScore,
-                                    gameMatchScore: gameMatchScore, 
-                                    totalMatchScore: totalMatchScore});
+            MatchScores.push({gameName: gameName,
+                            preferenceMatchScore: preferenceMatchScore,
+                            gameMatchScore: gameMatchScore, 
+                            totalMatchScore: totalMatchScore});
         }
 
         MatchScores.sort(function (a, b) {
@@ -38,7 +41,7 @@ exports.rank_matches = async function(userStats, userPreferences, gameMatches, g
 
         matchesSorted = [];
         MatchScores.forEach(function(match) {
-            matchesSorted.push(match.squadsName)
+            matchesSorted.push(match.gameName)
         });
 
         resolve(matchesSorted);

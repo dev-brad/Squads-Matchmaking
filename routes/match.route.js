@@ -60,10 +60,13 @@ router.get("/fortnite", async function(req, res) {
 
     if (req.isAuthenticated()){
 
+        let pref = await crud.findPMatch(req.session.preferences);
+        let fortniteMatches = await crud.findFMatch(pref);
+
         let userStats = req.session.gameStats;
         let userPreferences = req.session.preferences;
 
-        matchController.rank_matches(userStats, userPreferences, gameMatches, "Fortnite", (rankedMatches) => {
+        matchController.rank_matches(userStats, userPreferences, fortniteMatches, "Fortnite", (rankedMatches) => {
 
         res.render("match-report", {
             game: "Fortnite",
@@ -76,14 +79,17 @@ router.get("/fortnite", async function(req, res) {
     
 });
 
-router.get("/apex-legends", (req, res) => {
+router.get("/apex-legends", async function(req, res) {
     
     if (req.isAuthenticated()){
+
+        let pref = await crud.findPMatch(req.session.preferences);
+        let apexMatches = await crud.findAMatch(pref);
 
         let userStats = req.session.gameStats;
         let userPreferences = req.session.preferences;
 
-        matchController.rank_matches(userStats, userPreferences, gameMatches, "Apex Legends", (rankedMatches) => {
+        matchController.rank_matches(userStats, userPreferences, apexMatches, "Apex Legends", (rankedMatches) => {
 
         res.render("match-report", {
             game: "Apex Legends",
