@@ -10,6 +10,40 @@
 
 ---
 
+# Sprint 2
+
+## Story Points Forecast
+In Sprint 1 the team completed 14 story points, which included 13 tasks. The story points were completed just in time for review, but the team felt that we could continue at that velocity for Sprint 2. So a total of 14 story points was again forecast for Sprint 2, which this time totaled 12 tasks.
+
+## [Sprint Backlog and Kanban Board](https://trello.com/b/qfcXvM8Z)
+
+## Burndown Chart 
+(by # of tasks to complete our 14 story points)
+[Sprint 2 Burndown Chart](https://kennesawedu-my.sharepoint.com/:x:/g/personal/bgriff77_students_kennesaw_edu/EVDSDOtUzqVIq3ojAJkoZdwBpdfVhtU8xsr3VAASwbx1qQ?e=GdvZ0d)
+
+## [Daily Scrum Notes](https://kennesawedu-my.sharepoint.com/:w:/g/personal/bgriff77_students_kennesaw_edu/EchZzDAXABtBobOCyc6gvsABUof2H5lb8M5LfJC2dlhEyw?e=dcfE8c)
+
+## Paired Programming Sessions
+* [Working Toward Player Matching Queries (Brad + Marcus)](https://web.microsoftstream.com/video/64f2ebb8-9f56-44fe-9078-486fa09dff53)
+
+## Test Suites
+### Unit Tests
+![Unit Tests](https://github.com/dev-brad/Squads-Matchmaking/blob/bd46a4768584e852ef65f4d1da7d168c4695e3ec/readme-images/Squads%20Sprint%201%20Unit%20Tests.PNG)
+### Automated UAT Tests
+![UAT Tests](https://github.com/dev-brad/Squads-Matchmaking/blob/bd46a4768584e852ef65f4d1da7d168c4695e3ec/readme-images/UAT%20Test%20Results.PNG)
+
+## [Sprint Review & Retrospective Meeting](https://web.microsoftstream.com/video/38560f2d-4848-40bb-a69a-4d55fc02d057)
+
+## [Working Prototype: Squads Matchmaking](https://squads-matchmaking.herokuapp.com/index)
+
+### Increment includes:
+* Bootstrap Styling
+* Logout Button
+* Display Registration Errors to the User
+* Matchmaking Process
+
+---
+
 # Sprint 1
 
 ## Story Points Forecast
