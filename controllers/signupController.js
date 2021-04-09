@@ -42,7 +42,7 @@ exports.register_new_user = function(req, res) {
 
                         // Create user game stat document if username entered
                         if (req.body.fortniteName || req.body.apexName) {
-                            crud.createNewStatDocument(req.body.email, req.body.apexName, apexData, req.body.fortniteName, fortniteData);
+                            crud.createNewStatDocument(req.body.email, req.body.squadsName, req.body.apexName, apexData, req.body.fortniteName, fortniteData);
                         }
 
                         res.redirect("/preferences");

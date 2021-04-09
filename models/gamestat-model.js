@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const gameStatSchema = new mongoose.Schema ({
     email: String,
+    squadsName: String,
     fortniteName: String,
     fortniteScorePerMatch: Number,
     fortniteKD: Number,

@@ -21,7 +21,7 @@ exports.checkSquadsUsernameExists = async function (squadsName) {
     return result;
 }
 
-exports.createNewStatDocument = function (email, apexName, apexData, fortniteName, fortniteData) {
+exports.createNewStatDocument = function (email, squadsName, apexName, apexData, fortniteName, fortniteData) {
 
     const emailKey = email;
     var scorePerMatch;
@@ -49,6 +49,7 @@ exports.createNewStatDocument = function (email, apexName, apexData, fortniteNam
 
     const newStatDoc = new GameStat({
         email: emailKey,
+        squadsName: squadsName,
         fortniteName: fortniteName,
         fortniteScorePerMatch: scorePerMatch,
         fortniteKD: kd,
@@ -66,7 +67,7 @@ exports.createNewStatDocument = function (email, apexName, apexData, fortniteNam
     });
 }
 
-exports.findProfileData = async function(email, fn) {
+exports.findProfileData = async function(email, callback) {
     
     let squadsName = await findUserName(email);
     let gameStats = await findGameStats(email);
@@ -74,7 +75,7 @@ exports.findProfileData = async function(email, fn) {
 
     // let preferences = preference.getPreferenceByEmail();
 
-    fn(squadsName, gameStats, preferences);
+    callback(squadsName, gameStats, preferences);
 }
 
 async function findPreferences(email) {
@@ -167,9 +168,8 @@ exports.findPMatch = async function(sp) {
     let result = await promise;
 
     if (result) {
-        //remove this console  log
-        console.log(sp);
-        console.log(result);
+        // console.log("PREFERENCE QUERY RESULTS");
+        // console.log(result);
         return result;
     } else {
         return {};
@@ -184,13 +184,11 @@ exports.findFMatch = async function (pm) {
         matchEmails.push(match.email)
     });
 
-    console.log(matchEmails);
-
     let promise = new Promise((resolve, reject) => {
 
         const query = GameStat.where({$and: [
                                     { email: {$in: matchEmails} },
-                                    { fortniteName: {$ne: null} }
+                                    { fortniteName: {$ne: ""} }
                                     ]});
         query.find(function (err, fortniteMatches) {
             if (!err) {
@@ -203,7 +201,8 @@ exports.findFMatch = async function (pm) {
 
     let result = await promise;
 
-    console.log(result);
+    // console.log("FORTNITE QUERY RESULTS");
+    // console.log(result);
 
     gameMatches = [];
     result.forEach(function(stat) {
@@ -211,6 +210,7 @@ exports.findFMatch = async function (pm) {
             if (pref.email === stat.email) {
                 gameMatches.push({
                     email: pref.email,
+                    squadsName: stat.squadsName,
                     duos: pref.duos,
                     trios: pref.trios,
                     squads: pref.squads,
@@ -230,7 +230,8 @@ exports.findFMatch = async function (pm) {
         });
     });
 
-    console.log(gameMatches);
+    // console.log("FINAL GAME MATCH RESULTS");
+    // console.log(gameMatches);
 
     if (gameMatches) {
         return gameMatches;
@@ -247,13 +248,11 @@ exports.findAMatch = async function (pm) {
         matchEmails.push(match.email)
     });
 
-    console.log(matchEmails);
-
     let promise = new Promise((resolve, reject) => {
 
         const query = GameStat.where({$and: [
                                 { email: {$in: matchEmails} },
-                                { apexName: {$ne: null} }
+                                { apexName: {$ne: ""} }
                                 ]});
         query.find(function (err, apexMatches) {
             if (!err) {
@@ -266,7 +265,8 @@ exports.findAMatch = async function (pm) {
 
     let result = await promise;
 
-    console.log(result);
+    // console.log("APEX QUERY RESULTS");
+    // console.log(result);
 
     gameMatches = [];
     result.forEach(function(stat) {
@@ -274,6 +274,7 @@ exports.findAMatch = async function (pm) {
             if (pref.email === stat.email) {
                 gameMatches.push({
                     email: pref.email,
+                    squadsName: stat.squadsName,
                     duos: pref.duos,
                     trios: pref.trios,
                     squads: pref.squads,
@@ -293,7 +294,8 @@ exports.findAMatch = async function (pm) {
         });
     });
 
-    console.log(gameMatches);
+    // console.log("FINAL GAME MATCH RESULTS");
+    // console.log(gameMatches);
 
     if (gameMatches) {
         return gameMatches;
