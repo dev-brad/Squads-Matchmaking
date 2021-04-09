@@ -2,7 +2,7 @@ const { browser } = require("protractor");
 const { protractor } = require("protractor/built/ptor");
 const IndexPage = require("../Pages/Index.page");
 const SignupPage = require("../Pages/Signup.page");
-const PreferencesPage = require("../Pages/Preferences.page");
+//const PreferencesPage = require("../Pages/Preferences.page");
 
 
 describe('signup',()=>{
@@ -19,13 +19,13 @@ describe('signup',()=>{
     });
 
     it('should have firstname input box and should be required', () => {
-    console.log ("********" + SignupPage.RegisterHeader.getText());
+     
        expect(SignupPage.RegisterHeader.getText()).toEqual("Register");
        expect(SignupPage.firstNameHeader.getText()).toEqual("First Name");
        expect(SignupPage.firstNameInputBox.getAttribute("required")).toEqual('true');
      });
     it('should have email input box and should be required', () => {
-        expect(SignupPage.emailHeader.getText()).toEqual("Email");
+        expect(SignupPage.emailHeader.getText()).toEqual("Email Address");
         expect(SignupPage.emailInputBox.getAttribute("required")).toEqual('true');
      });
      it('should have squadsmatchmakingusername input box and should be required', () => {
@@ -56,8 +56,8 @@ describe('Signup Functionalities',()=>{
         SignupPage.squadsmatchmakingusernameInput.sendKeys("UserName"+Math.floor(Math.random() * 20));
         SignupPage.passwordInput.sendKeys("sdfsdf2342");
         SignupPage.submitButton.click();
-        expect(browser.getTitle()).toEqual("Preferences Form");
-        expect(Preferences.duosHeader.getTest().toEqual("duos"))
+        expect(browser.getTitle()).toEqual("Preferences");
+       // expect(Preferences.duosHeader.getTest().toEqual("duos"))
      });
 
 
