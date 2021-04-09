@@ -19,7 +19,7 @@ In Sprint 1 the team completed 14 story points, which included 13 tasks. The sto
 
 ## Burndown Chart 
 (by # of tasks to complete our 14 story points)
-[Sprint 2 Burndown Chart](https://kennesawedu-my.sharepoint.com/:x:/g/personal/bgriff77_students_kennesaw_edu/EVDSDOtUzqVIq3ojAJkoZdwBpdfVhtU8xsr3VAASwbx1qQ?e=GdvZ0d)
+![Sprint 2 Burndown Chart](https://github.com/dev-brad/Squads-Matchmaking/blob/decfefe28f1b111c625531d74c12696e8a376b3d/readme-images/Sprint%202%20Burndown%20Chart.PNG)
 
 ## [Daily Scrum Notes](https://kennesawedu-my.sharepoint.com/:w:/g/personal/bgriff77_students_kennesaw_edu/EchZzDAXABtBobOCyc6gvsABUof2H5lb8M5LfJC2dlhEyw?e=dcfE8c)
 
@@ -28,11 +28,13 @@ In Sprint 1 the team completed 14 story points, which included 13 tasks. The sto
 
 ## Test Suites
 ### Unit Tests
-![Unit Tests](https://github.com/dev-brad/Squads-Matchmaking/blob/bd46a4768584e852ef65f4d1da7d168c4695e3ec/readme-images/Squads%20Sprint%201%20Unit%20Tests.PNG)
-### Automated UAT Tests
-![UAT Tests](https://github.com/dev-brad/Squads-Matchmaking/blob/bd46a4768584e852ef65f4d1da7d168c4695e3ec/readme-images/UAT%20Test%20Results.PNG)
+![Unit Tests](https://github.com/dev-brad/Squads-Matchmaking/blob/decfefe28f1b111c625531d74c12696e8a376b3d/readme-images/Squads%20Sprint%202%20Unit%20Tests.PNG)
+### CI & CD Testing
+We have tried a couple of different tools looking for one to work well with NodeJS. This is still in progress.
 
-## [Sprint Review & Retrospective Meeting](https://web.microsoftstream.com/video/38560f2d-4848-40bb-a69a-4d55fc02d057)
+## Sprint Review & Retrospective Meeting
+For some reason, our recording of our Review meeting for Sprint 2 did not post and become available. Below is a screen capture of our meeting.
+![Sprint 2 Review Meeting](https://github.com/dev-brad/Squads-Matchmaking/blob/9dc54be83ef8ca73a702e383acc157e08a4f252c/readme-images/Sprint%202%20Review%20Meeting.PNG)
 
 ## [Working Prototype: Squads Matchmaking](https://squads-matchmaking.herokuapp.com/index)
 
