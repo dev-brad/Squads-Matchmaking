@@ -2,6 +2,7 @@ const { browser } = require("protractor");
 const { protractor } = require("protractor/built/ptor");
 const IndexPage = require("../Pages/Index.page");
 const SignupPage = require("../Pages/Signup.page");
+const PreferencesPage = require("../Pages/Preferences.page");
 
 
 describe('signup',()=>{
@@ -14,12 +15,14 @@ describe('signup',()=>{
     });
 
     it('should have correct page title', () => {
-       expect(browser.getTitle()).toEqual("Registration Page");
+       expect(browser.getTitle()).toEqual("Registration");
     });
 
     it('should have firstname input box and should be required', () => {
-        expect(SignupPage.firstNameHeader.getText()).toEqual("First Name");
-        expect(SignupPage.firstNameInputBox.getAttribute("required")).toEqual('true');
+    console.log ("********" + SignupPage.RegisterHeader.getText());
+       expect(SignupPage.RegisterHeader.getText()).toEqual("Register");
+       expect(SignupPage.firstNameHeader.getText()).toEqual("First Name");
+      //  expect(SignupPage.firstNameInputBox.getAttribute("required")).toEqual('true');
      });
     it('should have email input box and should be required', () => {
         expect(SignupPage.emailHeader.getText()).toEqual("Email");
@@ -54,6 +57,7 @@ describe('Signup Functionalities',()=>{
         SignupPage.passwordInput.sendKeys("sdfsdf2342");
         SignupPage.submitButton.click();
         expect(browser.getTitle()).toEqual("Preferences Form");
+        expect(Preferences.duosHeader.getTest().toEqual("duos"))
      });
 
 
