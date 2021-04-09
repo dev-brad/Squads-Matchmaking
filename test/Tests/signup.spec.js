@@ -22,7 +22,7 @@ describe('signup',()=>{
     console.log ("********" + SignupPage.RegisterHeader.getText());
        expect(SignupPage.RegisterHeader.getText()).toEqual("Register");
        expect(SignupPage.firstNameHeader.getText()).toEqual("First Name");
-      //  expect(SignupPage.firstNameInputBox.getAttribute("required")).toEqual('true');
+       expect(SignupPage.firstNameInputBox.getAttribute("required")).toEqual('true');
      });
     it('should have email input box and should be required', () => {
         expect(SignupPage.emailHeader.getText()).toEqual("Email");
