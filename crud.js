@@ -145,3 +145,160 @@ async function findUserName(email) {
     }
     
 }
+
+exports.findPMatch = async function(sp) {
+    let promise = new Promise((resolve, reject) => {
+
+        const query = Preference.where({ $and: [
+                                        { $or: [{ $and: [{ duos: sp.duos }, {duos: "Y"}] }, { $and: [{ trios: sp.trios }, {trios: "Y"}] }, { $and: [{ squads: sp.squads }, {squads: "Y"}] }] }, 
+                                        { $or: [{ $and: [{ casual: sp.casual }, {casual: "Y"}] }, { $and: [{ ranked: sp.ranked }, {ranked: "Y"}] }] }, 
+                                        { $or: [{ $and: [{ competitions: sp.competitions }, {competitions: "Y"}] }, { $and: [{ exhibitions: sp.exhibitions }, {exhibitions: "Y"}] }] },
+                                        { email: {$ne: sp.email}}
+                                        ]});
+        query.find(function (err, preferences) {
+            if (!err) {
+                resolve(preferences);
+            } else {
+                console.log(err);
+            }
+        });
+    });
+
+    let result = await promise;
+
+    if (result) {
+        //remove this console  log
+        console.log(sp);
+        console.log(result);
+        return result;
+    } else {
+        return {};
+    }
+
+}
+
+exports.findFMatch = async function (pm) {
+
+    matchEmails = [];
+    pm.forEach(function(match) {
+        matchEmails.push(match.email)
+    });
+
+    console.log(matchEmails);
+
+    let promise = new Promise((resolve, reject) => {
+
+        const query = GameStat.where({$and: [
+                                    { email: {$in: matchEmails} },
+                                    { fortniteName: {$ne: null} }
+                                    ]});
+        query.find(function (err, fortniteMatches) {
+            if (!err) {
+                resolve(fortniteMatches);
+            } else {
+                console.log(err);
+            }
+        });
+    });
+
+    let result = await promise;
+
+    console.log(result);
+
+    gameMatches = [];
+    result.forEach(function(stat) {
+        pm.filter(function(pref) {
+            if (pref.email === stat.email) {
+                gameMatches.push({
+                    email: pref.email,
+                    duos: pref.duos,
+                    trios: pref.trios,
+                    squads: pref.squads,
+                    casual: pref.casual,
+                    ranked: pref.ranked,
+                    competitions: pref.competitions,
+                    exhibitions: pref.exhibitions,
+                    funScale: pref.funScale,
+                    riskScale: pref.riskScale,
+                    fortniteName: stat.fortniteName,
+                    fortniteScorePerMatch: stat.fortniteScorePerMatch,
+                    fortniteKD: stat.fortniteKD,
+                    fortniteWinRate: stat.fortniteWinRate
+                    })
+            }
+            return;
+        });
+    });
+
+    console.log(gameMatches);
+
+    if (gameMatches) {
+        return gameMatches;
+    } else {
+        return {};
+    }
+
+}
+
+exports.findAMatch = async function (pm) {
+
+    matchEmails = [];
+    pm.forEach(function(match) {
+        matchEmails.push(match.email)
+    });
+
+    console.log(matchEmails);
+
+    let promise = new Promise((resolve, reject) => {
+
+        const query = GameStat.where({$and: [
+                                { email: {$in: matchEmails} },
+                                { apexName: {$ne: null} }
+                                ]});
+        query.find(function (err, apexMatches) {
+            if (!err) {
+                resolve(apexMatches);
+            } else {
+                console.log(err);
+            }
+        });
+    });
+
+    let result = await promise;
+
+    console.log(result);
+
+    gameMatches = [];
+    result.forEach(function(stat) {
+        pm.filter(function(pref) {
+            if (pref.email === stat.email) {
+                gameMatches.push({
+                    email: pref.email,
+                    duos: pref.duos,
+                    trios: pref.trios,
+                    squads: pref.squads,
+                    casual: pref.casual,
+                    ranked: pref.ranked,
+                    competitions: pref.competitions,
+                    exhibitions: pref.exhibitions,
+                    funScale: pref.funScale,
+                    riskScale: pref.riskScale,
+                    apexName: stat.apexName,
+                    apexLevel: stat.apexLevel,
+                    apexKills: stat.apexKills,
+                    apexDamage: stat.apexDamage
+                    })
+            }
+            return;
+        });
+    });
+
+    console.log(gameMatches);
+
+    if (gameMatches) {
+        return gameMatches;
+    } else {
+        return {};
+    }
+
+}
