@@ -4,30 +4,30 @@ const passport = require("passport");
 const crud = require(__dirname + "./../crud.js");
 const apiCalls = require(__dirname + "./../api-calls.js");
 
-exports.rank_matches = async function(userStats, userPreferences, gameMatches, game, fn) {
+exports.rank_matches = async function(userStats, userPreferences, gameMatches, game) {
 
     let promise = new Promise((resolve, reject) => {
         var MatchScores = [];
         for (const match of gameMatches) {
             let preferenceMatchScore = get_preference_match_score(userPreferences, match);
             let gameMatchScore;
-            let gameName;
+            let squadsName;
 
             switch (game) {
                 case "Fortnite":
                     gameMatchScore = get_fortnite_match_score(userStats, match);
-                    gameName = match.fortniteName;
+                    squadsName = match.squadsName;
                     break;
 
                 case "Apex Legends":
                     gameMatchScore = get_apex_match_score(userStats, match);
-                    gameName = match.apexName;
+                    squadsName = match.squadsName;
                     break;
             }
             
             let totalMatchScore = preferenceMatchScore - gameMatchScore;
 
-            MatchScores.push({gameName: gameName,
+            MatchScores.push({squadsName: squadsName,
                             preferenceMatchScore: preferenceMatchScore,
                             gameMatchScore: gameMatchScore, 
                             totalMatchScore: totalMatchScore});
@@ -37,18 +37,19 @@ exports.rank_matches = async function(userStats, userPreferences, gameMatches, g
             return (a.totalMatchScore - b.totalMatchScore) * -1;
         });
 
+        // console.log("MATCH SCORES");
         // console.log(MatchScores);
 
         matchesSorted = [];
         MatchScores.forEach(function(match) {
-            matchesSorted.push(match.gameName)
+            matchesSorted.push(match.squadsName);
         });
 
         resolve(matchesSorted);
     });
 
     let result = await promise;
-    fn(result);
+    return result;
 };
 
 function get_fortnite_match_score(userStats, fortniteMatch) {
