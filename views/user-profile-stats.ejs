@@ -59,6 +59,30 @@
                           </form>
                         </div>
                         <% } %>
+
+                        <div class="mt-3 section">
+                          <h4>Teammate Requests</h4>
+                          <ul>
+                          <% if (friendRequests) { %> 
+                          <% for (var i = 0; friendRequests.length > i; i++) { %> 
+                            <li>@<%= friendRequests[i].fromName %> </li>
+                          <% }} else { %> 
+                            <li>No current teammate requests.</li>
+                          <% } %> 
+                          </ul>
+                        </div>
+
+                        <div class="mt-3 section">
+                          <h4>Teammates</h4>
+                          <ul>
+                          <% if (friends) { %> 
+                          <% for (var i = 0; friends.length > i; i++) { %> 
+                            <li>@<%= friends[i].friendName %> </li>
+                          <% }} else { %> 
+                            <li>No teammates yet! Click buttons above to link account or find teammates.</li>
+                          <% } %> 
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </div>
