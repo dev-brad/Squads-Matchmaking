@@ -9,6 +9,21 @@ exports.get_user_profile = function(req, res) {
             req.session.gameStats = gameStats;
             req.session.preferences = preferences;
             req.session.save();
+
+            // let friendRequests = [{
+            //     email: email,
+            //     squadsName: squadsName,
+            //     fromEmail: "logan@xmen.com",
+            //     fromName: "wolverine"
+            //     }, {
+            //     email: email,
+            //     squadsName: squadsName,
+            //     fromEmail: "storm@xmen.com",
+            //     fromName: "storm"
+            // }];
+
+            let friendRequests;
+            let friends;
             
             res.render("user-profile-stats", {
                 squadsName: squadsName,
@@ -28,7 +43,9 @@ exports.get_user_profile = function(req, res) {
                 competitions: preferences.competitions, 
                 exhibitions: preferences.exhibitions, 
                 fcScale: preferences.funScale,  
-                rcScale: preferences.riskScale});
+                rcScale: preferences.riskScale,
+                friendRequests: friendRequests,
+                friends: friends});
         });
 
     } else {
