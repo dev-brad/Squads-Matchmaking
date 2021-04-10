@@ -64,9 +64,13 @@ app.use('/signin', signinRoutes);
 app.use('/signup', signupRoutes);
 
 app.delete('/signout', (req, res)=> {
-    req.logout()
-    req.redirect('/signin')
-})
+    if (req.isAuthenticated()) {
+        req.logOut()
+        return res.redirect('/signin') // Handle valid logout
+      }
+    
+      return res.status(401) // Handle unauthenticated response
+});
 
 app.use('/preferences', playerPreferencesRoutes);
 
