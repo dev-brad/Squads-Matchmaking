@@ -35,8 +35,8 @@ async function getFortniteData(fortniteName) {
 
         let promise = new Promise((resolve, reject) => {
             
-            fortniteURL = "https://fortnite-api.com/v1/stats/br/v2?name=" + fortniteName + "&accountType=" + accountType[i];
-                
+            fortniteURL = "https://fortnite-api.com/v1/stats/br/v2?name=" + fortniteName + "&accountType=" + accountType[i];    
+            
             https.get(fortniteURL, (response) => {
 
                 if (response.statusCode === 200) {
@@ -63,7 +63,9 @@ async function getFortniteData(fortniteName) {
         });
 
         let result = await promise;
+
         if (result === true) {
+            console.log(fortniteData);
             return fortniteData;
         }
     }
