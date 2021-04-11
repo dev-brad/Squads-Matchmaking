@@ -9,8 +9,10 @@
   margin: 0.5rem;
 }
 
-.section {
-  border: solid 1px #4caf50;
+.friends,
+.requests {
+  /* border: solid 1px #4caf50; */
+  background-color: whitesmoke;
   text-align: left;
   padding: 0.5rem 0 0 1rem;
   margin: 1rem;
@@ -27,12 +29,17 @@ li {
   margin: 0.25rem 1rem 0.25rem 0;
 }
 
-.section ul li:nth-child(odd) {
+.requests ul li {
   background-color: #4caf50;
   color: white;
 }
 
-.section ul li:nth-child(even) {
+.friends ul li:nth-child(odd) {
+  background-color: #4caf50;
+  color: white;
+}
+
+.friends ul li:nth-child(even) {
   background-color: whitesmoke;
   color: #4caf50;
 }

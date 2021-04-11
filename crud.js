@@ -1,3 +1,5 @@
+const FriendRequest = require("./models/friend-request-model");
+const Friend = require("./models/friend-model");
 
 const User = require(__dirname + "/models/user-model.js");
 const GameStat = require(__dirname + "/models/gamestat-model.js");
@@ -303,4 +305,119 @@ exports.findAMatch = async function (pm) {
         return {};
     }
 
+}
+
+exports.createNewFriendRequestDocument = function (email, squadsName, fromEmail, fromName) {
+
+    const newFriendRequestDoc = new FriendRequest({
+        email: email,
+        squadsName: squadsName,
+        fromEmail: fromEmail,
+        fromName: fromName
+    });
+
+    newFriendRequestDoc.save(function (err, doc) {
+        if (err) {
+            console.log(err);
+        }
+    });
+}
+
+exports.findFriendRequests = async function(email) {
+    let promise = new Promise((resolve, reject) => {
+
+        const query = FriendRequest.where({email: email});
+        query.find(function(err, requests) {
+            if (!err) {
+                resolve(requests);
+            } else {
+                console.log(err);
+            }
+        });
+    });
+
+    let result = await promise;
+    
+    if (result) {
+        return result;
+    } else {
+        return [];
+    }
+}
+
+exports.approveFriendRequest = async function(email, fromName) {
+
+    let promise = new Promise((resolve, reject) => {
+
+        const newFriendDoc = new Friend({
+            email: email,
+            friendName: fromName
+        });
+    
+        newFriendDoc.save(function (err, doc) {
+            if (err) {
+                console.log(err);
+                reject();
+            } else {
+                resolve();
+            }
+        });
+    });
+
+    await promise;
+
+    await deleteFriendRequest(email, fromName);
+
+    return;
+}
+
+exports.rejectFriendRequest = async function(email, fromName) {
+
+    await deleteFriendRequest(email, fromName);
+
+    return;
+}
+
+async function deleteFriendRequest(email, fromName) {
+    let promise = new Promise((resolve, reject) => {
+
+        const query = FriendRequest.where({$and: [
+                                    {email: email},
+                                    {fromName: fromName}
+                                    ]});
+        query.deleteOne(function(err) {
+            if (err) {
+                console.log(err);
+                reject();
+            } else {
+                resolve();
+            }
+        });
+    });
+
+    await promise;
+
+    return;
+}
+
+exports.findFriends = async function(email) {
+    let promise = new Promise((resolve, reject) => {
+
+        const query = Friend.where({email: email});
+        query.find(function(err, requests) {
+            if (!err) {
+                resolve(requests);
+            } else {
+                console.log(err);
+            }
+        });
+    });
+
+    let result = await promise;
+    
+    if (result) {
+        return result;
+    } else {
+        return [];
+    }
 }
