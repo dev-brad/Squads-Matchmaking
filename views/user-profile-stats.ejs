@@ -62,22 +62,26 @@
                         </div>
                         <% } %>
 
-                        <div class="mt-3 section">
+                        <div class="mt-3 requests">
                           <h4>Teammate Requests</h4>
-                          <ul>
-                          <% if (friendRequests) { %> 
-                          <% for (var i = 0; friendRequests.length > i; i++) { %> 
-                            <li>@<%= friendRequests[i].fromName %> </li>
-                          <% }} else { %> 
-                            <li>No current teammate requests.</li>
-                          <% } %> 
-                          </ul>
+                          <form action="/profile" method="post">
+                            <ul>
+                            <% if (friendRequests.length > 0) { %> 
+                            <% for (var i = 0; friendRequests.length > i; i++) { %> 
+                              <li>@<%= friendRequests[i].fromName %> </li>
+                              <button type="submit" name="accept" value="<%= friendRequests[i].fromName %>"" class="btn btn-success btn-sm">Accept</button>
+                              <button type="submit" name="reject" value="<%= friendRequests[i].fromName %>" class="btn btn-light btn-sm">Reject</button>
+                            <% }} else { %> 
+                              <li>No current teammate requests.</li>
+                            <% } %> 
+                            </ul>
+                          </form>
                         </div>
 
-                        <div class="mt-3 section">
+                        <div class="mt-3 friends">
                           <h4>Teammates</h4>
                           <ul>
-                          <% if (friends) { %> 
+                          <% if (friends.length > 0) { %> 
                           <% for (var i = 0; friends.length > i; i++) { %> 
                             <li>@<%= friends[i].friendName %> </li>
                           <% }} else { %> 

@@ -2,8 +2,6 @@ const mongoose = require("mongoose");
 
 const friendSchema = new mongoose.Schema ({
     email: String,
-    squadsName: String,
-    friendEmail: String,
     friendName: String
 });
 

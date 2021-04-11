@@ -7,4 +7,6 @@ const profileController = require('../controllers/profileController');
 // Get user profile if user is authenticated 
 router.get('/', profileController.get_user_profile);
 
+router.post('/', profileController.get_user_profile);
+
 module.exports = router;
