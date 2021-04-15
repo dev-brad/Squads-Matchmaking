@@ -149,6 +149,7 @@ async function findUserName(email) {
     
 }
 
+<<<<<<< HEAD
 exports.findPMatch = async function(sp) {
     let promise = new Promise((resolve, reject) => {
 
@@ -158,6 +159,12 @@ exports.findPMatch = async function(sp) {
                                         { $or: [{ $and: [{ competitions: sp.competitions }, {competitions: "Y"}] }, { $and: [{ exhibitions: sp.exhibitions }, {exhibitions: "Y"}] }] },
                                         { email: {$ne: sp.email}}
                                         ]});
+=======
+async function findPMatch(duos, trios, squads, casual, ranked, competitions, exhibitions) {
+    let promise = new Promise((resolve, reject) => {
+
+        const query = Preference.where({ $or: [{ duos: "Y" }, { trios: "Y" }, { squads: "Y" }], $or: [{ casual: "Y" }, { ranked: "Y" }], $or: [{ competitions: "Y" }, { exhibitions: "Y"}] });
+>>>>>>> 9f6402afa13ca98bd390e5849142d353b2425c9f
         query.find(function (err, preferences) {
             if (!err) {
                 resolve(preferences);
@@ -170,8 +177,13 @@ exports.findPMatch = async function(sp) {
     let result = await promise;
 
     if (result) {
+<<<<<<< HEAD
         // console.log("PREFERENCE QUERY RESULTS");
         // console.log(result);
+=======
+        //remove this console  log
+        console.log(result);
+>>>>>>> 9f6402afa13ca98bd390e5849142d353b2425c9f
         return result;
     } else {
         return {};
@@ -179,6 +191,7 @@ exports.findPMatch = async function(sp) {
 
 }
 
+<<<<<<< HEAD
 exports.findFMatch = async function (pm) {
 
     matchEmails = [];
@@ -192,6 +205,12 @@ exports.findFMatch = async function (pm) {
                                     { email: {$in: matchEmails} },
                                     { fortniteName: {$ne: ""} }
                                     ]});
+=======
+async function findFMatch() {
+    let promise = new Promise((resolve, reject) => {
+
+        const query = //enter info here// .where({ fortniteName: { $nin: [null, ""] }});
+>>>>>>> 9f6402afa13ca98bd390e5849142d353b2425c9f
         query.find(function (err, fortniteMatches) {
             if (!err) {
                 resolve(fortniteMatches);
@@ -203,6 +222,7 @@ exports.findFMatch = async function (pm) {
 
     let result = await promise;
 
+<<<<<<< HEAD
     // console.log("FORTNITE QUERY RESULTS");
     // console.log(result);
 
@@ -237,12 +257,19 @@ exports.findFMatch = async function (pm) {
 
     if (gameMatches) {
         return gameMatches;
+=======
+    if (result) {
+        //remove this console  log
+        console.log(results);
+        return result;
+>>>>>>> 9f6402afa13ca98bd390e5849142d353b2425c9f
     } else {
         return {};
     }
 
 }
 
+<<<<<<< HEAD
 exports.findAMatch = async function (pm) {
 
     matchEmails = [];
@@ -263,10 +290,24 @@ exports.findAMatch = async function (pm) {
                 console.log(err);
             }
         });
+=======
+async function findAMatch() {
+    let promise = new Promise((resolve, reject) => {
+
+        const query = //enter info here// .where({ apexName: { $nin: [null, ""] }});
+            query.find(function (err, apexMatches) {
+                if (!err) {
+                    resolve(apexMatches);
+                } else {
+                    console.log(err);
+                }
+            });
+>>>>>>> 9f6402afa13ca98bd390e5849142d353b2425c9f
     });
 
     let result = await promise;
 
+<<<<<<< HEAD
     // console.log("APEX QUERY RESULTS");
     // console.log(result);
 
@@ -421,3 +462,15 @@ exports.findFriends = async function(email) {
         return [];
     }
 }
+=======
+    if (result) {
+        //remove this console  log
+        console.log(results);
+        return result;
+    } else {
+        return {};
+    }
+
+}
+
+>>>>>>> 9f6402afa13ca98bd390e5849142d353b2425c9f
