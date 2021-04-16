@@ -1,9 +1,9 @@
 
 var IndexPage = function(){
     
-    this.welcomeText=$('body > h1 > center');
-    this.loginLink = $('body > div > button:nth-child(1) > a');
-    this.signupLink = $('body > div > button:nth-child(2) > a');
+    this.welcomeText=$('body > h1');
+    this.loginLink = $('body > center:nth-child(3) > div > button:nth-child(1) > a');
+    this.signupLink = $('body > center:nth-child(3) > div > button:nth-child(2) > a');
 
 };
 
