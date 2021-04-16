@@ -15,6 +15,8 @@ const signupRoutes = require(__dirname + '/routes/signup.route.js');
 const matchRoutes = require(__dirname + '/routes/match.route.js');
 const playerPreferencesRoutes = require(__dirname + '/routes/playerPreferences.route.js');
 
+const methodOverride = require('method-override');
+
 const app = express();
 
 app.set("view engine", "ejs");
@@ -34,6 +36,7 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride('_method'));
 
 const uri = process.env.DB_URI;
 
@@ -58,8 +61,16 @@ app.use('/index', indexRoutes);
 app.use('/profile', profileRoutes);
 
 app.use('/signin', signinRoutes);
-
 app.use('/signup', signupRoutes);
+
+app.delete('/signout', (req, res)=> {
+    if (req.isAuthenticated()) {
+        req.logOut()
+        return res.redirect('/signin') // Handle valid logout
+      }
+    
+      return res.status(401) // Handle unauthenticated response
+});
 
 app.use('/preferences', playerPreferencesRoutes);
 
