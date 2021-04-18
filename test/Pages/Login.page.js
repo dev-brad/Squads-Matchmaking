@@ -1,13 +1,17 @@
 var LoginPage = function(){
     
-    this.emailHeader=$('body > div > form > label:nth-child(1) > b');
-    this.emailInputBox = $('body > div > form > input[type=email]:nth-child(2)');
-    this.passwordHeader = $('body > div > form > label:nth-child(3) > b');
-    this.passwordInputBox = $('body > div > form > input[type=password]:nth-child(4)');
-    this.signupLink = $('body > form > div > span > a');
-    this.loginButton = $('body > div > form > button');
+    //this.emailHeader=element(by. css("label[for='full_name']")); //$('body > >main > div > div>div> div>div:nth-child(2)>form >div> label:nth-child(1) > b');
+    this.emailInputBox = element(by.css('form input[name="email"]')); //$('body > >main > div > div>div> div>div:nth-child(2)>form >div:nth-child(2)> input[type=email]');
+   // this.passwordHeader = $('body > div > form > label:nth-child(3) > b');
+    this.passwordInputBox = element(by.css('form input[name="password"]'));
+  //  this.signupLink = $('body > form > div > span > a');
+    this.loginButton = element(by.css('form button[type="submit"]'));
     
+    this.loadpage = function(site){
+        browser.ignoreSynchronization = true;
+        browser.get(site);
+            };
     
 };
 
-module.exports = new LoginPage();
+module.exports = new LoginPage(); 

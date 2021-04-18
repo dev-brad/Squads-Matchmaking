@@ -9,7 +9,7 @@ describe('Index', () => {
     });
 
     it('should have correct page title', () => {
-        //browser.sleep(5000);
+        
        expect(browser.getTitle()).toEqual("Home Page");
        expect(IndexPage.welcomeText.getText()).toEqual("Welcome to the #1 matchmaking application for squads everywhere!");
     });

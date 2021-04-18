@@ -1,9 +1,15 @@
+const { browser } = require("protractor");
 
 var IndexPage = function(){
     
-    this.welcomeText=$('body > h1 > center');
-    this.loginLink = $('body > div > button:nth-child(1) > a');
-    this.signupLink = $('body > div > button:nth-child(2) > a');
+    this.welcomeText=$('body > h1');
+    this.loginLink = element(by.css('[href="/signin"]'));  
+    this.signupLink =  element(by.css('[href="/signup"]'));  
+
+    this.loadpage = function(site){
+browser.ignoreSynchronization = true;
+browser.get(site);
+    };
 
 };
 
