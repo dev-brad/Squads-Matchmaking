@@ -1,15 +1,10 @@
-var Preferences  = function(){
+var PreferencesPage = function(){
 
-    this.duosHeader=$('body > main >  div > div >div >div > div  > form > label:nth-child(1) > b');
-
-//     this.submitButton=$('body > div > form > button');
-
+    this.playerNumbersDuos=element(by.name('duos'));
+    this.modeCasual=element(by.name('casual'));
+    this.exihibitions=element(by.name('exhibitions'));
+    this.submitButton = $('div.card-body button');
 
 };
 
-module.exports = new Preferences();
-
-
-
-
-
+module.exports = new PreferencesPage();

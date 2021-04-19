@@ -9,7 +9,7 @@ exports.config = {
     browserName: 'chrome'
   },
   
-  specs: ['../Tests/*.spec.js'], 
+  specs: ['../Tests/e2e.spec.js'], 
 
 onPrepare: function () {
     browser.driver.manage().window().maximize();
