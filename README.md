@@ -10,6 +10,42 @@
 
 ---
 
+# Sprint 2
+
+## Story Points Forecast
+In Sprint 1 the team completed 14 story points, which included 13 tasks. The story points were completed just in time for review, but the team felt that we could continue at that velocity for Sprint 2. So a total of 14 story points was again forecast for Sprint 2, which this time totaled 12 tasks.
+
+## [Sprint Backlog and Kanban Board](https://trello.com/b/qfcXvM8Z)
+
+## Burndown Chart 
+(by # of tasks to complete our 14 story points)
+![Sprint 2 Burndown Chart](https://github.com/dev-brad/Squads-Matchmaking/blob/decfefe28f1b111c625531d74c12696e8a376b3d/readme-images/Sprint%202%20Burndown%20Chart.PNG)
+
+## [Daily Scrum Notes](https://kennesawedu-my.sharepoint.com/:w:/g/personal/bgriff77_students_kennesaw_edu/EchZzDAXABtBobOCyc6gvsABUof2H5lb8M5LfJC2dlhEyw?e=dcfE8c)
+
+## Paired Programming Sessions
+* [Working Toward Player Matching Queries (Brad + Marcus)](https://web.microsoftstream.com/video/64f2ebb8-9f56-44fe-9078-486fa09dff53)
+
+## Test Suites
+### Unit Tests
+![Unit Tests](https://github.com/dev-brad/Squads-Matchmaking/blob/decfefe28f1b111c625531d74c12696e8a376b3d/readme-images/Squads%20Sprint%202%20Unit%20Tests.PNG)
+### CI & CD Testing
+We have tried a couple of different tools looking for one to work well with NodeJS. This is still in progress.
+
+## Sprint Review & Retrospective Meeting
+For some reason, our recording of our Review meeting for Sprint 2 did not post and become available. Below is a screen capture of our meeting.
+![Sprint 2 Review Meeting](https://github.com/dev-brad/Squads-Matchmaking/blob/9dc54be83ef8ca73a702e383acc157e08a4f252c/readme-images/Sprint%202%20Review%20Meeting.PNG)
+
+## [Working Prototype: Squads Matchmaking](https://squads-matchmaking.herokuapp.com/index)
+
+### Increment includes:
+* Bootstrap Styling
+* Logout Button
+* Display Registration Errors to the User
+* Matchmaking Process
+
+---
+
 # Sprint 1
 
 ## Story Points Forecast

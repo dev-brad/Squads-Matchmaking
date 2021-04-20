@@ -1,3 +1,4 @@
+
 var SignupPage = function(){
 
     this.firstNameHeader=$('body > div > form > label:nth-child(1) > b');
