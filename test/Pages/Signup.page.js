@@ -1,24 +1,18 @@
 
 var SignupPage = function(){
 
-    
-    this.RegisterHeader=$(' body > main > div > div > div > div:nth-child(1) > div:nth-child(1) ');
-     
-    this.firstNameHeader=$(' body > main > div > div > div > div > div:nth-child(2)> form > div > label:nth-child(1)');
-    this.firstNameInputBox=$('body > main > div > div > div > div > div:nth-child(2)> form > div > div:nth-child(2) > input[type=text]'); 
-    // this.lastNameHeader=$('body > div > form > label:nth-child(3) > b');
-    this.lastNameHeader=$('body > main > div > div > div > div > div:nth-child(2)> form >div:nth-child(2) >label:nth-child(1)');
-     this.lastNameInputBox=$('body > main > div > div > div > div > div:nth-child(2)> form >  div:nth-child(2) > div> input[type=text] ');
-     this.emailHeader=$('body > main > div > div > div > div > div:nth-child(2)> form >div:nth-child(3) >label:nth-child(1)');
-     this.emailInputBox = $('body > main > div > div > div > div > div:nth-child(2)> form >  div:nth-child(3) > div >input[type=text]');
-     //this.birthdate=$('body > main > div > div > div > div > div:nth-child(2)> form >div:nth-child(4) >label:nth-child(1)');
-     this.birthdateInputBox = $('body > main > div > div > div > div > div:nth-child(2)> form >  div:nth-child(4) > div >input[type=date]');
-     this.squadsmatchmakingusername=$('body > main > div > div > div > div > div:nth-child(2)> form >div:nth-child(5) >label:nth-child(1)');
-     this.squadsmatchmakingusernameInput = $('body > main > div > div > div > div > div:nth-child(2)> form >  div:nth-child(5) > div >input[type=text]');
-    // this.passwordHeader=$('body > div > form > label:nth-child(15) > b');
-     this.passwordInput = $('body > main > div > div > div > div > div:nth-child(2)> form >  div:nth-child(8) > div >input[type=password]');
-     this.submitButton=$('body > main > div > div > div > div > div:nth-child(2)> form >  div:nth-child(9) > button');
-
+    this.firstNameHeader=$('body > div > form > label:nth-child(1) > b');
+    this.firstNameInputBox=element(by.name('fname'));
+    this.lastNameInputBox=element(by.name('lname'));
+    this.emailHeader=$('body > div > form > label:nth-child(5) > b');
+    this.emailInputBox = element(by.name('email'));
+     this.squadsmatchmakingusername=$('body > div > form > label:nth-child(9) > b');
+     this.squadsmatchmakingusernameInput = element(by.name('squadsName'));
+    this.birthdateInputBox = element(by.name('bdate'));
+    this.apexLegendUsername = element(by.name('apexName'));
+    this.fortniteUsername = element(by.name('fortniteName'));
+    this.passwordInput = element(by.name('password'));
+    this.registerButton = $('div.card-body button');
 
 };
 

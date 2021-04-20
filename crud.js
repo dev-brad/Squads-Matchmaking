@@ -8,8 +8,8 @@ const Preference = require(__dirname + "/models/preferences-model.js");
 
 exports.checkSquadsUsernameExists = async function (squadsName) {
     let promise = new Promise((resolve, reject) => {
-        const query = User.where({squadsName: squadsName});
-        query.findOne(function(err, user) {
+        const query = User.where({ squadsName: squadsName });
+        query.findOne(function (err, user) {
             if (!err) {
                 resolve(user);
             } else {
@@ -19,7 +19,7 @@ exports.checkSquadsUsernameExists = async function (squadsName) {
     });
 
     let result = await promise;
-    
+
     return result;
 }
 
@@ -58,7 +58,7 @@ exports.createNewStatDocument = function (email, squadsName, apexName, apexData,
         fortniteWinRate: winRate,
         apexName: apexName,
         apexLevel: level,
-        apexKills: kills,   
+        apexKills: kills,
         apexDamage: damage
     });
 
@@ -69,8 +69,8 @@ exports.createNewStatDocument = function (email, squadsName, apexName, apexData,
     });
 }
 
-exports.findProfileData = async function(email, callback) {
-    
+exports.findProfileData = async function (email, callback) {
+
     let squadsName = await findUserName(email);
     let gameStats = await findGameStats(email);
     let preferences = await findPreferences(email);
@@ -83,8 +83,8 @@ exports.findProfileData = async function(email, callback) {
 async function findPreferences(email) {
     let promise = new Promise((resolve, reject) => {
 
-        const query = Preference.where({email: email});
-        query.findOne(function(err, preferences) {
+        const query = Preference.where({ email: email });
+        query.findOne(function (err, preferences) {
             if (!err) {
                 resolve(preferences);
             } else {
@@ -94,20 +94,20 @@ async function findPreferences(email) {
     });
 
     let result = await promise;
-    
+
     if (result) {
         return result;
     } else {
         return {};
     }
-    
+
 }
 
 async function findGameStats(email) {
     let promise = new Promise((resolve, reject) => {
 
-        const query = GameStat.where({email: email});
-        query.findOne(function(err, gameStats) {
+        const query = GameStat.where({ email: email });
+        query.findOne(function (err, gameStats) {
             if (!err) {
                 resolve(gameStats);
             } else {
@@ -117,20 +117,20 @@ async function findGameStats(email) {
     });
 
     let result = await promise;
-    
+
     if (result) {
         return result;
     } else {
         return {};
     }
-    
+
 }
 
 async function findUserName(email) {
     let promise = new Promise((resolve, reject) => {
 
-        const query = User.where({email: email});
-        query.findOne(function(err, user) {
+        const query = User.where({ email: email });
+        query.findOne(function (err, user) {
             if (!err) {
                 resolve(user);
             } else {
@@ -140,31 +140,26 @@ async function findUserName(email) {
     });
 
     let result = await promise;
-    
+
     if (result) {
         return result.squadsName;
     } else {
         return {};
     }
-    
+
 }
 
-<<<<<<< HEAD
-exports.findPMatch = async function(sp) {
+exports.findPMatch = async function (sp) {
     let promise = new Promise((resolve, reject) => {
 
-        const query = Preference.where({ $and: [
-                                        { $or: [{ $and: [{ duos: sp.duos }, {duos: "Y"}] }, { $and: [{ trios: sp.trios }, {trios: "Y"}] }, { $and: [{ squads: sp.squads }, {squads: "Y"}] }] }, 
-                                        { $or: [{ $and: [{ casual: sp.casual }, {casual: "Y"}] }, { $and: [{ ranked: sp.ranked }, {ranked: "Y"}] }] }, 
-                                        { $or: [{ $and: [{ competitions: sp.competitions }, {competitions: "Y"}] }, { $and: [{ exhibitions: sp.exhibitions }, {exhibitions: "Y"}] }] },
-                                        { email: {$ne: sp.email}}
-                                        ]});
-=======
-async function findPMatch(duos, trios, squads, casual, ranked, competitions, exhibitions) {
-    let promise = new Promise((resolve, reject) => {
-
-        const query = Preference.where({ $or: [{ duos: "Y" }, { trios: "Y" }, { squads: "Y" }], $or: [{ casual: "Y" }, { ranked: "Y" }], $or: [{ competitions: "Y" }, { exhibitions: "Y"}] });
->>>>>>> 9f6402afa13ca98bd390e5849142d353b2425c9f
+        const query = Preference.where({
+            $and: [
+                { $or: [{ $and: [{ duos: sp.duos }, { duos: "Y" }] }, { $and: [{ trios: sp.trios }, { trios: "Y" }] }, { $and: [{ squads: sp.squads }, { squads: "Y" }] }] },
+                { $or: [{ $and: [{ casual: sp.casual }, { casual: "Y" }] }, { $and: [{ ranked: sp.ranked }, { ranked: "Y" }] }] },
+                { $or: [{ $and: [{ competitions: sp.competitions }, { competitions: "Y" }] }, { $and: [{ exhibitions: sp.exhibitions }, { exhibitions: "Y" }] }] },
+                { email: { $ne: sp.email } }
+            ]
+        });
         query.find(function (err, preferences) {
             if (!err) {
                 resolve(preferences);
@@ -177,13 +172,8 @@ async function findPMatch(duos, trios, squads, casual, ranked, competitions, exh
     let result = await promise;
 
     if (result) {
-<<<<<<< HEAD
         // console.log("PREFERENCE QUERY RESULTS");
         // console.log(result);
-=======
-        //remove this console  log
-        console.log(result);
->>>>>>> 9f6402afa13ca98bd390e5849142d353b2425c9f
         return result;
     } else {
         return {};
@@ -191,26 +181,21 @@ async function findPMatch(duos, trios, squads, casual, ranked, competitions, exh
 
 }
 
-<<<<<<< HEAD
 exports.findFMatch = async function (pm) {
 
     matchEmails = [];
-    pm.forEach(function(match) {
+    pm.forEach(function (match) {
         matchEmails.push(match.email)
     });
 
     let promise = new Promise((resolve, reject) => {
 
-        const query = GameStat.where({$and: [
-                                    { email: {$in: matchEmails} },
-                                    { fortniteName: {$ne: ""} }
-                                    ]});
-=======
-async function findFMatch() {
-    let promise = new Promise((resolve, reject) => {
-
-        const query = //enter info here// .where({ fortniteName: { $nin: [null, ""] }});
->>>>>>> 9f6402afa13ca98bd390e5849142d353b2425c9f
+        const query = GameStat.where({
+            $and: [
+                { email: { $in: matchEmails } },
+                { fortniteName: { $ne: "" } }
+            ]
+        });
         query.find(function (err, fortniteMatches) {
             if (!err) {
                 resolve(fortniteMatches);
@@ -222,13 +207,12 @@ async function findFMatch() {
 
     let result = await promise;
 
-<<<<<<< HEAD
     // console.log("FORTNITE QUERY RESULTS");
     // console.log(result);
 
     gameMatches = [];
-    result.forEach(function(stat) {
-        pm.filter(function(pref) {
+    result.forEach(function (stat) {
+        pm.filter(function (pref) {
             if (pref.email === stat.email) {
                 gameMatches.push({
                     email: pref.email,
@@ -246,7 +230,7 @@ async function findFMatch() {
                     fortniteScorePerMatch: stat.fortniteScorePerMatch,
                     fortniteKD: stat.fortniteKD,
                     fortniteWinRate: stat.fortniteWinRate
-                    })
+                })
             }
             return;
         });
@@ -257,32 +241,27 @@ async function findFMatch() {
 
     if (gameMatches) {
         return gameMatches;
-=======
-    if (result) {
-        //remove this console  log
-        console.log(results);
-        return result;
->>>>>>> 9f6402afa13ca98bd390e5849142d353b2425c9f
     } else {
         return {};
     }
 
 }
 
-<<<<<<< HEAD
 exports.findAMatch = async function (pm) {
 
     matchEmails = [];
-    pm.forEach(function(match) {
+    pm.forEach(function (match) {
         matchEmails.push(match.email)
     });
 
     let promise = new Promise((resolve, reject) => {
 
-        const query = GameStat.where({$and: [
-                                { email: {$in: matchEmails} },
-                                { apexName: {$ne: ""} }
-                                ]});
+        const query = GameStat.where({
+            $and: [
+                { email: { $in: matchEmails } },
+                { apexName: { $ne: "" } }
+            ]
+        });
         query.find(function (err, apexMatches) {
             if (!err) {
                 resolve(apexMatches);
@@ -290,30 +269,16 @@ exports.findAMatch = async function (pm) {
                 console.log(err);
             }
         });
-=======
-async function findAMatch() {
-    let promise = new Promise((resolve, reject) => {
-
-        const query = //enter info here// .where({ apexName: { $nin: [null, ""] }});
-            query.find(function (err, apexMatches) {
-                if (!err) {
-                    resolve(apexMatches);
-                } else {
-                    console.log(err);
-                }
-            });
->>>>>>> 9f6402afa13ca98bd390e5849142d353b2425c9f
     });
 
     let result = await promise;
 
-<<<<<<< HEAD
     // console.log("APEX QUERY RESULTS");
     // console.log(result);
 
     gameMatches = [];
-    result.forEach(function(stat) {
-        pm.filter(function(pref) {
+    result.forEach(function (stat) {
+        pm.filter(function (pref) {
             if (pref.email === stat.email) {
                 gameMatches.push({
                     email: pref.email,
@@ -331,7 +296,7 @@ async function findAMatch() {
                     apexLevel: stat.apexLevel,
                     apexKills: stat.apexKills,
                     apexDamage: stat.apexDamage
-                    })
+                })
             }
             return;
         });
@@ -364,11 +329,11 @@ exports.createNewFriendRequestDocument = function (email, squadsName, fromEmail,
     });
 }
 
-exports.findFriendRequests = async function(email) {
+exports.findFriendRequests = async function (email) {
     let promise = new Promise((resolve, reject) => {
 
-        const query = FriendRequest.where({email: email});
-        query.find(function(err, requests) {
+        const query = FriendRequest.where({ email: email });
+        query.find(function (err, requests) {
             if (!err) {
                 resolve(requests);
             } else {
@@ -378,7 +343,7 @@ exports.findFriendRequests = async function(email) {
     });
 
     let result = await promise;
-    
+
     if (result) {
         return result;
     } else {
@@ -386,7 +351,7 @@ exports.findFriendRequests = async function(email) {
     }
 }
 
-exports.approveFriendRequest = async function(email, fromName) {
+exports.approveFriendRequest = async function (email, fromName) {
 
     let promise = new Promise((resolve, reject) => {
 
@@ -394,7 +359,7 @@ exports.approveFriendRequest = async function(email, fromName) {
             email: email,
             friendName: fromName
         });
-    
+
         newFriendDoc.save(function (err, doc) {
             if (err) {
                 console.log(err);
@@ -412,7 +377,7 @@ exports.approveFriendRequest = async function(email, fromName) {
     return;
 }
 
-exports.rejectFriendRequest = async function(email, fromName) {
+exports.rejectFriendRequest = async function (email, fromName) {
 
     await deleteFriendRequest(email, fromName);
 
@@ -422,11 +387,13 @@ exports.rejectFriendRequest = async function(email, fromName) {
 async function deleteFriendRequest(email, fromName) {
     let promise = new Promise((resolve, reject) => {
 
-        const query = FriendRequest.where({$and: [
-                                    {email: email},
-                                    {fromName: fromName}
-                                    ]});
-        query.deleteOne(function(err) {
+        const query = FriendRequest.where({
+            $and: [
+                { email: email },
+                { fromName: fromName }
+            ]
+        });
+        query.deleteOne(function (err) {
             if (err) {
                 console.log(err);
                 reject();
@@ -441,11 +408,11 @@ async function deleteFriendRequest(email, fromName) {
     return;
 }
 
-exports.findFriends = async function(email) {
+exports.findFriends = async function (email) {
     let promise = new Promise((resolve, reject) => {
 
-        const query = Friend.where({email: email});
-        query.find(function(err, requests) {
+        const query = Friend.where({ email: email });
+        query.find(function (err, requests) {
             if (!err) {
                 resolve(requests);
             } else {
@@ -455,22 +422,10 @@ exports.findFriends = async function(email) {
     });
 
     let result = await promise;
-    
+
     if (result) {
         return result;
     } else {
         return [];
     }
 }
-=======
-    if (result) {
-        //remove this console  log
-        console.log(results);
-        return result;
-    } else {
-        return {};
-    }
-
-}
-
->>>>>>> 9f6402afa13ca98bd390e5849142d353b2425c9f
