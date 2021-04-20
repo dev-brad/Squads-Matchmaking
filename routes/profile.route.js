@@ -9,4 +9,6 @@ router.get('/', profileController.get_user_profile);
 
 router.post('/', profileController.get_user_profile);
 
+router.get('/match', profileController.get_match_profile);
+
 module.exports = router;
