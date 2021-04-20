@@ -89,6 +89,25 @@
                           <% } %> 
                           </ul>
                         </div>
+
+
+
+
+                          <div class="mt-3 friends">
+                          <h4>Squads</h4>
+                          <ul>
+                          <% if (friends.length > 0) { %> 
+                          <% for (var i = 0; friends.length > i; i++) { %> 
+                            <li>@<%= friends[i].friendName %> </li>
+                          <% }} else { %> 
+                            <li>No Squads yet! Click create squad above to create a squad.</li>
+                          <% } %> 
+                          </div>
+
+
+
+
+
                       </div>
                     </div>
                   </div>
