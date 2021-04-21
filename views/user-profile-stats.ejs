@@ -26,14 +26,13 @@
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex flex-column align-items-center text-center">
-                        <img src="images/default-profile-pic.jpeg" alt="profie pic" class="rounded-circle" width="150">
-                        <div class="mt-3">
-                          <h4>@<%= squadsName %></h4>
-                        </div>
-
-                        <% if (mainUser === 'y') { %>
-                          <div>
-                            <button type="submit" class="btn btn-primary">Logout</button>
+                        <% if (mainUser === 'Y') { %>
+                          <img src="images/default-profile-pic.jpeg" alt="profile pic" class="rounded-circle" width="150">
+                          <div class="mt-3">
+                            <h4>@<%= squadsName %></h4>
+                            <form action="/signout" method="get">
+                              <button type="submit" class="btn btn-primary">Logout</button>
+                            </form>
                           </div>
 
                           <% if (fortniteName) { %>
@@ -64,43 +63,34 @@
                           </div>
                           <% } %>
 
-                        <% } else { %>
-                          <div>
-                            <button type="submit" class="btn btn-primary">Add Teammate</button>
+                          <div class="mt-3 requests">
+                            <h4>Teammate Requests</h4>
+                            <form action="/profile" method="post">
+                              <ul>
+                              <% if (friendRequests.length > 0) { %>
+                              <% for (var i = 0; friendRequests.length > i; i++) { %>
+                                <li>@<%= friendRequests[i].fromName %> </li>
+                                <button type="submit" name="accept" value="<%= friendRequests[i].fromName %>" class="btn btn-success btn-sm">Accept</button>
+                                <button type="submit" name="reject" value="<%= friendRequests[i].fromName %>" class="btn btn-light btn-sm">Reject</button>
+                              <% }} else { %>
+                                <li>No current teammate requests.</li>
+                              <% } %>
+                              </ul>
+                            </form>
                           </div>
-                          <% } %>
-
-                        <div class="mt-3 requests">
-                          <h4>Teammate Requests</h4>
-                          <form action="/profile" method="post">
+  
+                          <div class="mt-3 friends">
+                            <h4>Teammates</h4>
                             <ul>
-                            <% if (friendRequests.length > 0) { %>
-                            <% for (var i = 0; friendRequests.length > i; i++) { %>
-                              <li>@<%= friendRequests[i].fromName %> </li>
-                              <button type="submit" name="accept" value="<%= friendRequests[i].fromName %>"" class="btn btn-success btn-sm">Accept</button>
-                              <button type="submit" name="reject" value="<%= friendRequests[i].fromName %>" class="btn btn-light btn-sm">Reject</button>
+                            <% if (friends.length > 0) { %>
+                            <% for (var i = 0; friends.length > i; i++) { %>
+                              <li>@<%= friends[i].friendName %> </li>
                             <% }} else { %>
-                              <li>No current teammate requests.</li>
+                              <li>No teammates yet! Click buttons above to link account or find teammates.</li>
                             <% } %>
                             </ul>
-                          </form>
-                        </div>
-
-                        <div class="mt-3 friends">
-                          <h4>Teammates</h4>
-                          <ul>
-                          <% if (friends.length > 0) { %>
-                          <% for (var i = 0; friends.length > i; i++) { %>
-                            <li>@<%= friends[i].friendName %> </li>
-                          <% }} else { %>
-                            <li>No teammates yet! Click buttons above to link account or find teammates.</li>
-                          <% } %>
-                          </ul>
-                        </div>
-
-
-
-
+                          </div>
+  
                           <div class="mt-3 friends">
                           <h4>Squads</h4>
                           <ul>
@@ -112,10 +102,18 @@
                           <% } %>
                           </div>
 
+                        <% } else { %>
+                          <img src="../images/default-profile-pic.jpeg" alt="profile pic" class="rounded-circle" width="150">
+                          <div class="mt-3">
+                            <h4>@<%= squadsName %></h4>
+                          </div>
 
-
-
-
+                          <div class="mt-3">
+                            <form action="/profile/match" method="post">
+                              <button class="btn btn-primary">Send Teammate Request</button>
+                            </form>
+                          </div>
+                        <% } %>
                       </div>
                     </div>
                   </div>

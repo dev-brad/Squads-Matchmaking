@@ -71,28 +71,60 @@ describe("Database Queries", function() {
 
 describe("Match Logic", function() {
 
-    it("should return best match for Fortnite user", function(done) { 
+    it("should return best match for Fortnite user", async function() { 
+        this.timeout(5000);
+        this.slow(4000);
 
         const userStats = {squadsName: "Mario", fortniteName: "Mario", fortniteScorePerMatch: 315.76, fortniteKD: 1.76, fortniteWinRate: 7.25};
 
         const userPreferences = {squads: "Y", casual: "Y", exhibitions: "Y", funScale: 25, riskScale: 75};
     
-        matchController.rank_matches(userStats, userPreferences, gameMatches, "Fortnite", (rankedMatches) => {
-            expect(rankedMatches[0]).to.equal("Spider-Man");
-            done();
-        });
+        let rankedMatches = await matchController.rank_matches(userStats, userPreferences, gameMatches, "Fortnite");
+
+        expect(rankedMatches[0]).to.equal("Spider-Man");
     });
 
-    it("should return best match for Apex Legends user", function(done) { 
+    it("should return best match for Apex Legends user", async function() { 
+        this.timeout(5000);
+        this.slow(4000);
 
         const userStats = {squadsName: "Luigi", apexName: "Luigi", apexLevel: 2000, apexKills: 1500, apexDamage: 6000};
 
         const userPreferences = {squads: "Y", casual: "Y", exhibitions: "Y", funScale: 25, riskScale: 75};
     
-        matchController.rank_matches(userStats, userPreferences, gameMatches, "Apex Legends", (rankedMatches) => {
-            expect(rankedMatches[0]).to.equal("Rocket Raccoon");
-            done();
-        });
+        let rankedMatches = await matchController.rank_matches(userStats, userPreferences, gameMatches, "Apex Legends"); 
         
+        expect(rankedMatches[0]).to.equal("Rocket Raccoon");
     });
+});
+
+describe("Teammate Logic", function() {
+
+    it("should create new Friend Request", async function() {
+        this.timeout(5000);
+        this.slow(4000);
+
+        let email = "brad@email.com";
+
+        await crud.createNewFriendRequestDocument(email, "brad123", "rogue@xmen.com", "rogue");
+        
+        let friendRequest = await crud.findFriendRequests(email);
+        
+        expect(friendRequest[0].fromName).to.equal("rogue");
+
+        await crud.rejectFriendRequest(email, "rogue");
+    });
+
+    // it("should return best match for Apex Legends user", function(done) { 
+
+    //     const userStats = {squadsName: "Luigi", apexName: "Luigi", apexLevel: 2000, apexKills: 1500, apexDamage: 6000};
+
+    //     const userPreferences = {squads: "Y", casual: "Y", exhibitions: "Y", funScale: 25, riskScale: 75};
+    
+    //     matchController.rank_matches(userStats, userPreferences, gameMatches, "Apex Legends", (rankedMatches) => {
+    //         expect(rankedMatches[0]).to.equal("Rocket Raccoon");
+    //         done();
+    //     });
+        
+    // });
 });
