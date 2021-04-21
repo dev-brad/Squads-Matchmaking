@@ -109,11 +109,16 @@ describe("Teammate Logic", function() {
         await crud.createNewFriendRequestDocument(email, "brad123", "sturgis@ksu.edu", "sturgis the owl");
         
         let friendRequest = await crud.findFriendRequests(email);
-        console.log(friendRequest);
-        let result = friendRequest.filter(x => x.fromName === "sturgis the owl");
-        let i = result.length - 1;
-        
-        expect(friendRequest[i].fromName).to.equal("sturgis the owl");
+
+        let promise = new Promise((resolve, reject) => {
+            let result = friendRequest.filter(x => x.fromName === "sturgis the owl");
+            let i = result.length - 1;
+            
+            expect(friendRequest[i].fromName).to.equal("sturgis the owl");
+            resolve();
+        });
+
+        await promise;
     });
 
     it("should add to Friends table when approve Friend Request", async function() {
