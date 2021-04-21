@@ -2,7 +2,6 @@
     "environments": {
       "test": {
         "scripts": {
-            "test-setup": "node server.js",
             "test": "mocha ./test/unit-tests"
         },
         "env": {
