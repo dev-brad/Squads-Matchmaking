@@ -109,7 +109,8 @@ describe("Teammate Logic", function() {
         await crud.createNewFriendRequestDocument(email, "brad123", "frodo@bagend.com", "frodo9");
         
         let friendRequest = await crud.findFriendRequests(email);
-        let i = friendRequest.length - 1;
+        let result = friendRequest.filter(x => x.fromName === "frodo9");
+        let i = result.length - 1;
         
         expect(friendRequest[i].fromName).to.equal("frodo9");
     });
