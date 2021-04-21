@@ -30,8 +30,8 @@
     "supertest": "^6.1.3"
   },
   "scripts": {
-    "test-setup": "node server.js",
-    "test": "mocha ./test/unit-tests --exit",
+    "unit": "mocha ./test/unit-tests --exit",
+    "test": "protractor ./test/Configuration/conf.js",
     "dev": "nodemon server.js"
   },
   "repository": {
