@@ -175,6 +175,8 @@ describe("Teammate Logic", function() {
 
         let email = "brad@email.com";
         let fromName = "rogue";
+
+        await crud.rejectFriendRequest(email, fromName);
         
         let requests = await crud.findFriendRequests(email);
 
