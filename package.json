@@ -31,7 +31,7 @@
   },
   "scripts": {
     "test-setup": "node server.js",
-    "test": "mocha ./test/unit-tests",
+    "test": "mocha ./test/unit-tests --exit",
     "dev": "nodemon server.js"
   },
   "repository": {
