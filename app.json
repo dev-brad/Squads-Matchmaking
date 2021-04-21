@@ -4,10 +4,7 @@
         "scripts": {
             "test-setup": "node node_modules/protractor/bin/webdriver-manager update",
             "test": "protractor conf.js"
-        },
-        "buildpacks":[
-            "heroku-buildpack-google-chrome"
-        ]
+        }
       }
     }
   }
