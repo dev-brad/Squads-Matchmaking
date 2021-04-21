@@ -24,6 +24,7 @@ exports.get_user_profile = async function(req, res) {
             
             res.render("user-profile-stats", {
                 mainUser: "Y",
+                mainUserName: squadsName,
                 squadsName: squadsName,
                 fortniteName: gameStats.fortniteName,
                 scorePerMatch: gameStats.fortniteScorePerMatch,
@@ -60,10 +61,13 @@ exports.get_match_profile = async function(req, res) {
         req.session.matchUser = matchUser;
         req.session.save();
 
+        let friends = await crud.findFriends(matchUser.email);
+
         crud.findProfileData(matchUser.email, (squadsName, gameStats, preferences) => {  
             
             res.render("user-profile-stats", {
                 mainUser: "N",
+                mainUserName: req.session.squadsName,
                 squadsName: squadsName,
                 fortniteName: gameStats.fortniteName,
                 scorePerMatch: gameStats.fortniteScorePerMatch,
@@ -81,7 +85,8 @@ exports.get_match_profile = async function(req, res) {
                 competitions: preferences.competitions, 
                 exhibitions: preferences.exhibitions, 
                 fcScale: preferences.funScale,  
-                rcScale: preferences.riskScale});
+                rcScale: preferences.riskScale,
+                friends: friends});
         });
 
     } else {
