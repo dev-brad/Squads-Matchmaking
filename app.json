@@ -1,0 +1,15 @@
+{
+    "environments": {
+      "test": {
+        "scripts": {
+            "test-setup": "node server.js",
+            "test": "mocha ./test/unit-tests"
+        },
+        "env": {
+            "DB_URI": "mongodb://localhost:27017/squadsDB",
+            "SECRET": "SquadsMatching",
+            "API_KEY": "1e6e1691-9eba-45ff-97f1-27b5f299ae69"
+          }
+      }
+    }
+  }
