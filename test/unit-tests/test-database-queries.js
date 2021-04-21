@@ -106,25 +106,72 @@ describe("Teammate Logic", function() {
 
         let email = "brad@email.com";
 
-        await crud.createNewFriendRequestDocument(email, "brad123", "rogue@xmen.com", "rogue");
+        await crud.createNewFriendRequestDocument(email, "brad123", "frodo@bagend.com", "frodo9");
         
         let friendRequest = await crud.findFriendRequests(email);
         
-        expect(friendRequest[0].fromName).to.equal("rogue");
-
-        await crud.rejectFriendRequest(email, "rogue");
+        expect(friendRequest[0].fromName).to.equal("frodo9");
     });
 
-    // it("should return best match for Apex Legends user", function(done) { 
+    it("should add to Friends table when approve Friend Request", async function() {
+        this.timeout(5000);
+        this.slow(4000);
 
-    //     const userStats = {squadsName: "Luigi", apexName: "Luigi", apexLevel: 2000, apexKills: 1500, apexDamage: 6000};
-
-    //     const userPreferences = {squads: "Y", casual: "Y", exhibitions: "Y", funScale: 25, riskScale: 75};
-    
-    //     matchController.rank_matches(userStats, userPreferences, gameMatches, "Apex Legends", (rankedMatches) => {
-    //         expect(rankedMatches[0]).to.equal("Rocket Raccoon");
-    //         done();
-    //     });
+        let email = "brad@email.com";
+        let squadsName = "brad123";
+        let fromName = "frodo9";
         
-    // });
+        await crud.approveFriendRequest(email, squadsName, fromName);
+
+        let friends = await crud.findFriends(email);
+        let result = friends.filter(x => x.friendName === "frodo9");
+        let i = result.length - 1;
+        
+        expect(result[i].friendName).to.equal("frodo9");
+    });
+
+    it("should remove from Friend Requests table when approve Friend Request", async function() {
+        this.timeout(5000);
+        this.slow(4000);
+
+        let email = "brad@email.com";
+        let fromName = "frodo9";
+        
+        let requests = await crud.findFriendRequests(email);
+
+        let result = requests.filter(x => x.fromName === fromName);
+        
+        expect(result).to.be.empty;
+    });
+
+    it("should NOT add to Friends table when reject Friend Request", async function() {
+        this.timeout(5000);
+        this.slow(4000);
+
+        let email = "brad@email.com";
+        let fromName = "rogue";
+
+        await crud.createNewFriendRequestDocument(email, "brad123", "rogue@xmen.com", "rogue");
+        
+        await crud.rejectFriendRequest(email, fromName);
+
+        let friends = await crud.findFriends(email);
+        let result = friends.filter(x => x.friendName === "rogue");
+        
+        expect(result).to.be.empty;
+    });
+
+    it("should remove from Friend Requests table when reject Friend Request", async function() {
+        this.timeout(5000);
+        this.slow(4000);
+
+        let email = "brad@email.com";
+        let fromName = "rogue";
+        
+        let requests = await crud.findFriendRequests(email);
+
+        let result = requests.filter(x => x.fromName === fromName);
+        
+        expect(result).to.be.empty;
+    });
 });

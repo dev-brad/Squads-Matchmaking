@@ -207,6 +207,30 @@ describe("GET routes", function() {
     });
   });
 
+  it("should get /match/fortnite when user logged in", function(done) {
+    authenticatedUser 
+    .get("/match/fortnite")
+    .expect(200)
+    .end(function(err, res) {
+      if (err) {
+        return done(err);
+      }
+      return done();
+    });
+  });
+
+  it("should get /match/apex-legends when user logged in", function(done) {
+    authenticatedUser 
+    .get("/match/apex-legends")
+    .expect(200)
+    .end(function(err, res) {
+      if (err) {
+        return done(err);
+      }
+      return done();
+    });
+  });
+
 });
 
 describe("POST routes", function() {
@@ -335,6 +359,24 @@ describe("POST routes", function() {
     .send(newPreferences)
     .expect(302)
     .expect('Location', '/profile')
+    .set('Content-Type', 'application/x-www-form-urlencoded')
+    .end(function(err, res){
+      if (err) {
+        return done(err);
+      }
+      return done();
+    });
+  });
+
+  it("should redirect /match POST to /profile/match", function(done) {
+
+    let match = "frodo9";
+
+    authenticatedUser 
+    .post('/match')
+    .send(match)
+    .expect(302)
+    .expect('Location', '/profile/match')
     .set('Content-Type', 'application/x-www-form-urlencoded')
     .end(function(err, res){
       if (err) {
