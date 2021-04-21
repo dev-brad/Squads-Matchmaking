@@ -65,7 +65,7 @@ async function getFortniteData(fortniteName) {
         let result = await promise;
 
         if (result === true) {
-            console.log(fortniteData);
+            // console.log(fortniteData);
             return fortniteData;
         }
     }
