@@ -4,27 +4,26 @@ exports.get_user_profile = async function(req, res) {
     
     if (req.isAuthenticated()){
         let email = req.session.email;
+        let squadsName = req.session.squadsName;
 
         if (req.body.accept) {
-            await crud.approveFriendRequest(email, req.body.accept);
+            await crud.approveFriendRequest(email, squadsName, req.body.accept);
         } else if (req.body.reject) {
             await crud.rejectFriendRequest(email, req.body.reject);
         }
-
-        // This function call will be in the other users' profile POST route 
-        // await crud.createNewFriendRequestDocument(email, "brad123", "rogue@xmen.com", "rogue");
-        // await crud.createNewFriendRequestDocument(email, "brad123", "remy@xmen.com", "gambit");
 
         let friendRequests = await crud.findFriendRequests(email);
         let friends = await crud.findFriends(email);
 
         crud.findProfileData(email, (squadsName, gameStats, preferences) => {
 
+            req.session.squadsName = squadsName;
             req.session.gameStats = gameStats;
             req.session.preferences = preferences;
             req.session.save();    
             
             res.render("user-profile-stats", {
+                mainUser: "Y",
                 squadsName: squadsName,
                 fortniteName: gameStats.fortniteName,
                 scorePerMatch: gameStats.fortniteScorePerMatch,
@@ -55,15 +54,16 @@ exports.get_user_profile = async function(req, res) {
 exports.get_match_profile = async function(req, res) {
     
     if (req.isAuthenticated()){
-        let email = req.session.email;
+       
+        let matchName = req.session.matchName;
+        let matchUser = await crud.checkSquadsUsernameExists(matchName);
+        req.session.matchUser = matchUser;
+        req.session.save();
 
-        crud.findProfileData(email, (squadsName, gameStats, preferences) => {
-
-            req.session.gameStats = gameStats;
-            req.session.preferences = preferences;
-            req.session.save();    
+        crud.findProfileData(matchUser.email, (squadsName, gameStats, preferences) => {  
             
             res.render("user-profile-stats", {
+                mainUser: "N",
                 squadsName: squadsName,
                 fortniteName: gameStats.fortniteName,
                 scorePerMatch: gameStats.fortniteScorePerMatch,
@@ -81,12 +81,24 @@ exports.get_match_profile = async function(req, res) {
                 competitions: preferences.competitions, 
                 exhibitions: preferences.exhibitions, 
                 fcScale: preferences.funScale,  
-                rcScale: preferences.riskScale,
-                friendRequests: friendRequests,
-                friends: friends});
+                rcScale: preferences.riskScale});
         });
 
     } else {
+        res.redirect("/signin");
+    }
+};
+
+exports.post_friend_request = async function(req, res) {
+
+    if (req.isAuthenticated()){
+
+    let matchUser = req.session.matchUser;
+    await crud.createNewFriendRequestDocument(matchUser.email, matchUser.squadsName, req.session.email, req.session.squadsName);
+    
+    res.redirect("/profile");
+
+} else {
         res.redirect("/signin");
     }
 };

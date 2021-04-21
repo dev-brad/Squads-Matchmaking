@@ -351,9 +351,9 @@ exports.findFriendRequests = async function (email) {
     }
 }
 
-exports.approveFriendRequest = async function (email, fromName) {
+exports.approveFriendRequest = async function (email, squadsName, fromName) {
 
-    let promise = new Promise((resolve, reject) => {
+    let promise1 = new Promise((resolve, reject) => {
 
         const newFriendDoc = new Friend({
             email: email,
@@ -370,7 +370,39 @@ exports.approveFriendRequest = async function (email, fromName) {
         });
     });
 
-    await promise;
+    await promise1;
+
+    let promise2 = new Promise((resolve, reject) => {
+        const query = User.where({ squadsName: fromName });
+        query.findOne(function (err, user) {
+            if (!err) {
+                resolve(user);
+            } else {
+                console.log(err);
+            }
+        });
+    });
+
+    let newFriend = await promise2;
+
+    let promise3 = new Promise((resolve, reject) => {
+
+        const newFriendDoc = new Friend({
+            email: newFriend.email,
+            friendName: squadsName
+        });
+
+        newFriendDoc.save(function (err, doc) {
+            if (err) {
+                console.log(err);
+                reject();
+            } else {
+                resolve();
+            }
+        });
+    });
+
+    await promise3;
 
     await deleteFriendRequest(email, fromName);
 

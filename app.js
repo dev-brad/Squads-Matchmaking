@@ -72,6 +72,11 @@ app.delete('/signout', (req, res)=> {
       return res.status(401) // Handle unauthenticated response
 });
 
+app.get('/signout', function(req, res){
+    req.logout();
+    res.redirect('/');
+  });
+
 app.use('/preferences', playerPreferencesRoutes);
 
 app.get('/preferences', (req, res) => {
