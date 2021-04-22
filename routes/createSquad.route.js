@@ -8,6 +8,6 @@ const createSquadController = require('../controllers/createSquadController');
 //});
 router.get('/', createSquadController.get_friends);
 
-router.post('/', createSquadController.createNewSquad);
+router.post('/', createSquadController.post_team_request);
 
 module.exports = router;
