@@ -17,12 +17,14 @@ exports.get_user_profile = async function(req, res) {
 
         let friendRequests = await crud.findFriendRequests(email);
         let friends = await crud.findFriends(email);
+        
 
         crud.findProfileData(email, (squadsName, gameStats, preferences) => {
 
             req.session.gameStats = gameStats;
             req.session.preferences = preferences;
             req.session.save();    
+            let teams = crud.findTeams(squadsName);
             
             res.render("user-profile-stats", {
                 squadsName: squadsName,
@@ -44,7 +46,9 @@ exports.get_user_profile = async function(req, res) {
                 fcScale: preferences.funScale,  
                 rcScale: preferences.riskScale,
                 friendRequests: friendRequests,
-                friends: friends});
+                friends: friends,
+                teams: teams
+            });
         });
 
     } else {

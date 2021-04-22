@@ -1,5 +1,6 @@
 const FriendRequest = require("./models/friend-request-model");
 const Friend = require("./models/friend-model");
+const Team = require("./models/team-model");
 
 const User = require(__dirname + "/models/user-model.js");
 const GameStat = require(__dirname + "/models/gamestat-model.js");
@@ -412,6 +413,28 @@ exports.findFriends = async function (email) {
     let promise = new Promise((resolve, reject) => {
 
         const query = Friend.where({ email: email });
+        query.find(function (err, requests) {
+            if (!err) {
+                resolve(requests);
+            } else {
+                console.log(err);
+            }
+        });
+    });
+
+    let result = await promise;
+
+    if (result) {
+        return result;
+    } else {
+        return [];
+    }
+}
+
+exports.findTeams = async function (squadsName) {
+    let promise = new Promise((resolve, reject) => {
+
+        const query = Team.where({ teamMates: { $in: [squadsName] } } );
         query.find(function (err, requests) {
             if (!err) {
                 resolve(requests);
