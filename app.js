@@ -14,7 +14,7 @@ const signinRoutes = require(__dirname + '/routes/signin.route.js');
 const signupRoutes = require(__dirname + '/routes/signup.route.js');
 const matchRoutes = require(__dirname + '/routes/match.route.js');
 const playerPreferencesRoutes = require(__dirname + '/routes/playerPreferences.route.js');
-// const createSquadRoutes = require(__dirname + '/routes/createSquad.route.js');
+const createSquadRoutes = require(__dirname + '/routes/createSquad.route.js');
 const methodOverride = require('method-override');
 
 const app = express();
@@ -90,7 +90,7 @@ app.get('/preferences', (req, res) => {
 
 app.use('/match', matchRoutes);
 
-// app.use('/createsquad', createSquadRoutes);
+app.use('/createsquad', createSquadRoutes);
 
 
 module.exports = app;

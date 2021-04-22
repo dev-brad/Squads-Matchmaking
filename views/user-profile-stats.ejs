@@ -35,6 +35,12 @@
                             </form>
                           </div>
 
+                           <div class="mt-3">
+                          <form action="/createSquad/" method="get">
+                            <button class="btn btn-primary">Create Squads</button>
+                          </form>
+                        </div>
+
                           <% if (fortniteName) { %>
                           <div class="mt-3">
                             <form action="/match/fortnite" method="get">
@@ -96,10 +102,10 @@
                           <div class="mt-3 friends">
                           <h4>Squads</h4>
                           <ul>
-                          <% if (friends.length > 0) { %>
-                          <% for (var i = 0; friends.length > i; i++) { %>
-                            <li>@<%= friends[i].friendName %> </li>
-                          <% }} else { %>
+                          <% if (teams.length> 0) { %> 
+                          <% for (var i = 0; teams.length > i; i++) { %> 
+                            <li><%= teams[i].teamName %> </li>
+                          <% }} else { %> 
                             <li>No Squads yet! Click create squad above to create a squad.</li>
                           <% } %>
                           </div>

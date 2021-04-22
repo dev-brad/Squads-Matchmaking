@@ -44,20 +44,25 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <div class="col-md-6">
-                                        <input type="radio" id="fortnite" name="gameType" value="fortnite">
-                                        <label for="fortnite">Fortnite</label><br>
-                                        <input type="radio" id="apex-legends" name="gameType" value="apex-legends">
-                                        <label for="apex-legends">Apex-Legends</label><br>
-                                    </div>
+                                        <div class="col-md-4 col-form-label text-md-right" style="margin-left: 0px">
+                                            <input type="radio" id="fortnite" name="gameType" value="fortnite">
+                                            <label for="fortnite">Fortnite</label><br>
+                                            <input type="radio" id="apex-legends" name="gameType" value="apex-legends">
+                                            <label for="apex-legends" ">Apex-Legends</label><br>
+
+                                        </div>
+                                    
                                 </div>
 
-                                <div class="form-group row">
-                                    <label for="user_name" class="col-md-4 col-form-label text-md-right">Email Address</label>
-                                    <div class="col-md-6">
-                                        <input type="text" placeholder="Enter Email Address" id="user_name" class="form-control" name="email" required>
-                                    </div>
-                                </div>
+                                <label for="teams" style="margin-left:105px">Choose your squad: </label>
+
+                                  <% if (friends.length > 0) { %> 
+                                  <select name="player" id="teams" size="3" multiple>
+                                   <% for (var i = 0; friends.length > i; i++) { %>
+                                    <option  value="<%= friends[i].friendName%>"><%= friends[i].friendName%></option>
+                                   <%}%>
+                                  </select>  <% } else { %> <center><b><p>No friends</p></b></center><%}%>
+
 
                                 
                                 <div class="col-md-6 offset-md-4">

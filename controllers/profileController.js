@@ -5,8 +5,7 @@ exports.get_user_profile = async function(req, res) {
     if (req.isAuthenticated()){
         let email = req.session.email;
         let squadsName = req.session.squadsName;
-        console.log(squadsName);
-
+ 
         if (req.body.accept) {
             await crud.approveFriendRequest(email, squadsName, req.body.accept);
         } else if (req.body.reject) {
@@ -16,12 +15,18 @@ exports.get_user_profile = async function(req, res) {
         let friendRequests = await crud.findFriendRequests(email);
         let friends = await crud.findFriends(email);
 
+        let user = await crud.findSquadsName(email);
+        let teams = await crud.findTeams(user);
+        console.log(teams);
+
         crud.findProfileData(email, (squadsName, gameStats, preferences) => {
 
             req.session.squadsName = squadsName;
             req.session.gameStats = gameStats;
             req.session.preferences = preferences;
             req.session.save();    
+            
+            
             
             res.render("user-profile-stats", {
                 mainUser: "Y",
@@ -45,7 +50,9 @@ exports.get_user_profile = async function(req, res) {
                 fcScale: preferences.funScale,  
                 rcScale: preferences.riskScale,
                 friendRequests: friendRequests,
-                friends: friends});
+                friends: friends,
+                teams: teams
+            });
         });
 
     } else {
