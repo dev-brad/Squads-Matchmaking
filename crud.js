@@ -150,6 +150,29 @@ async function findUserName(email) {
 
 }
 
+exports.findSquadsName = async function(email) {
+    let promise = new Promise((resolve, reject) => {
+
+        const query = User.where({ email: email });
+        query.findOne(function (err, user) {
+            if (!err) {
+                resolve(user);
+            } else {
+                console.log(err);
+            }
+        });
+    });
+
+    let result = await promise;
+
+    if (result) {
+        return result.squadsName;
+    } else {
+        return {};
+    }
+
+}
+
 exports.findPMatch = async function (sp) {
     let promise = new Promise((resolve, reject) => {
 
@@ -464,9 +487,10 @@ exports.findFriends = async function (email) {
 }
 
 exports.findTeams = async function (squadsName) {
+    console.log(squadsName);
     let promise = new Promise((resolve, reject) => {
 
-        const query = Team.where({ teamMates: { $in: [squadsName] } } );
+        const query = Team.where({ teamMates: { "$in": [squadsName] }});
         query.find(function (err, requests) {
             if (!err) {
                 resolve(requests);
