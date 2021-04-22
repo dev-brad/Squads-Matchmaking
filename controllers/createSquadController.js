@@ -3,11 +3,19 @@ const Squads = require(__dirname + './../models/team-model');
 const crud = require(__dirname + "./../crud.js");
 
 exports.createNewSquad = (req, res) => {
-
+    //let teamMates = [];
+    //for (var i = 0; i < 4; i++) {
+    //    if (req.body.player + i) {
+      //      teamMates.push(req.body.player + i);
+        //}
+    //}
+    console.log(req.body.player);
+    //console.log(teamMates);
     const newSquad = new Squads({
         teamLeaderEmail: req.session.email,
         teamGame: req.body.gameType,
         teamName: req.body.sname,
+        teamMates: req.body.player
     });
     newSquad
         .save()

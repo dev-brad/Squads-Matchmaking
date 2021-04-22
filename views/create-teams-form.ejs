@@ -57,9 +57,9 @@
                                 <label for="teams" style="margin-left:105px">Choose your squad: </label>
 
                                   <% if (friends.length > 0) { %> 
-                                  <select id="teams" name="players" size="3" multiple>
+                                  <select name="player" id="teams" size="3" multiple>
                                    <% for (var i = 0; friends.length > i; i++) { %>
-                                    <option value="<%= friends[1]%>"><%= friends[1]%></option>
+                                    <option  value="<%= friends[i].friendName%>"><%= friends[i].friendName%></option>
                                    <%}%>
                                   </select>  <% } else { %> <center><b><p>No friends</p></b></center><%}%>
 
