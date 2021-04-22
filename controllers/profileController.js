@@ -5,6 +5,7 @@ exports.get_user_profile = async function(req, res) {
     if (req.isAuthenticated()){
         let email = req.session.email;
         let squadsName = req.session.squadsName;
+        console.log(squadsName);
 
         if (req.body.accept) {
             await crud.approveFriendRequest(email, squadsName, req.body.accept);
