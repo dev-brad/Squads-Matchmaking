@@ -5,15 +5,25 @@ exports.get_user_profile = async function(req, res) {
     if (req.isAuthenticated()){
         let email = req.session.email;
         let squadsName = req.session.squadsName;
-
+ 
         if (req.body.accept) {
             await crud.approveFriendRequest(email, squadsName, req.body.accept);
         } else if (req.body.reject) {
             await crud.rejectFriendRequest(email, req.body.reject);
         }
 
+        if (req.body.acceptTeam) {
+            await crud.approveTeamRequest(email, req.body.teamName, req.body.acceptTeam);
+        } else if (req.body.rejectTeam) {
+            await crud.rejectTeamRequest(email, req.body.rejectTeam);
+        }
+
         let friendRequests = await crud.findFriendRequests(email);
         let friends = await crud.findFriends(email);
+
+        let teamRequests = await crud.findTeamRequests(email);
+        let user = await crud.findSquadsName(email);
+        let teams = await crud.findTeams(user);
 
         crud.findProfileData(email, (squadsName, gameStats, preferences) => {
 
@@ -44,7 +54,10 @@ exports.get_user_profile = async function(req, res) {
                 fcScale: preferences.funScale,  
                 rcScale: preferences.riskScale,
                 friendRequests: friendRequests,
-                friends: friends});
+                friends: friends,
+                teamRequests: teamRequests,
+                teams: teams
+            });
         });
 
     } else {
@@ -62,6 +75,7 @@ exports.get_match_profile = async function(req, res) {
         req.session.save();
 
         let friends = await crud.findFriends(matchUser.email);
+        let teams = await crud.findTeams(matchName);
 
         crud.findProfileData(matchUser.email, (squadsName, gameStats, preferences) => {  
             
@@ -86,7 +100,8 @@ exports.get_match_profile = async function(req, res) {
                 exhibitions: preferences.exhibitions, 
                 fcScale: preferences.funScale,  
                 rcScale: preferences.riskScale,
-                friends: friends});
+                friends: friends,
+                teams: teams});
         });
 
     } else {

@@ -1,5 +1,7 @@
 const FriendRequest = require("./models/friend-request-model");
 const Friend = require("./models/friend-model");
+const Team = require("./models/team-model");
+const TeamRequest = require("./models/team-request-model");
 
 const User = require(__dirname + "/models/user-model.js");
 const GameStat = require(__dirname + "/models/gamestat-model.js");
@@ -127,6 +129,29 @@ async function findGameStats(email) {
 }
 
 async function findUserName(email) {
+    let promise = new Promise((resolve, reject) => {
+
+        const query = User.where({ email: email });
+        query.findOne(function (err, user) {
+            if (!err) {
+                resolve(user);
+            } else {
+                console.log(err);
+            }
+        });
+    });
+
+    let result = await promise;
+
+    if (result) {
+        return result.squadsName;
+    } else {
+        return {};
+    }
+
+}
+
+exports.findSquadsName = async function(email) {
     let promise = new Promise((resolve, reject) => {
 
         const query = User.where({ email: email });
@@ -460,4 +485,125 @@ exports.findFriends = async function (email) {
     } else {
         return [];
     }
+}
+
+exports.findTeams = async function (squadsName) {
+
+    let promise = new Promise((resolve, reject) => {
+
+        const query = Team.where({ teamMates: { "$in": [squadsName] }});
+        query.find(function (err, requests) {
+            if (!err) {
+                resolve(requests);
+            } else {
+                console.log(err);
+            }
+        });
+    });
+
+    let result = await promise;
+
+    if (result) {
+        return result;
+    } else {
+        return [];
+    }
+}
+
+exports.createNewTeamRequestDocument = function (email, squadsName, teamName, teamGame, fromEmail, fromName) {
+
+    const newTeamRequestDoc = new TeamRequest({
+        email: email,
+        squadsName: squadsName,
+        teamName: teamName,
+        teamGame: teamGame,
+        fromEmail: fromEmail,
+        fromName: fromName
+    });
+
+    newTeamRequestDoc.save(function (err, doc) {
+        if (err) {
+            console.log(err);
+        }
+    });
+}
+
+exports.findTeamRequests = async function (email) {
+    let promise = new Promise((resolve, reject) => {
+
+        const query = TeamRequest.where({ email: email });
+        query.find(function (err, requests) {
+            if (!err) {
+                resolve(requests);
+            } else {
+                console.log(err);
+            }
+        });
+    });
+
+    let result = await promise;
+
+    if (result) {
+        return result;
+    } else {
+        return [];
+    }
+}
+
+exports.approveTeamRequest = async function (email, teamName, fromName) {
+
+    let squadsName = await findUserName(email);
+
+    let promise = new Promise((resolve, reject) => {
+
+        Team.findOneAndUpdate({
+                $and: [
+                    { teamName: teamName },
+                    { teamMates: { "$in": [fromName] }}
+                ]},
+                { $push: {teamMates: squadsName}}, function (err, docs) {
+                if (err){
+                    console.log(err)
+                } else {
+                    resolve();
+                }
+        });
+    });
+
+    await promise;
+
+    await deleteTeamRequest(email, fromName);
+
+    return;
+}
+
+exports.rejectTeamRequest = async function (email, fromName) {
+
+    await deleteTeamRequest(email, fromName);
+
+    return;
+}
+
+async function deleteTeamRequest(email, fromName) {
+    let promise = new Promise((resolve, reject) => {
+
+        const query = TeamRequest.where({
+            $and: [
+                { email: email },
+                { fromName: fromName }
+            ]
+        });
+        query.deleteOne(function (err) {
+            if (err) {
+                console.log(err);
+                reject();
+            } else {
+                resolve();
+            }
+        });
+    });
+
+    await promise;
+
+    return;
 }
