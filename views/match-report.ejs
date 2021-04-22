@@ -30,18 +30,20 @@
         <h2>Top 10 <%= game %> Matches</h2>
         <ol class="rounded-list">
         <li>
-        <ol>
-        <li><a href="/profile" target="_blank"><%= matchList[0] %> &nbsp;</a></li>
-        <li><a href="/profile" target="_blank"><%= matchList[1] %> &nbsp;</a></li>
-        <li><a href="/profile" target="_blank"><%= matchList[2] %> &nbsp;</a></li>
-        <li><a href="/profile" target="_blank"><%= matchList[3] %> &nbsp;</a></li>
-        <li><a href="/profile" target="_blank"><%= matchList[4] %> &nbsp;</a></li>
-        <li><a href="/profile" target="_blank"><%= matchList[5] %> &nbsp;</a></li>
-        <li><a href="/profile" target="_blank"><%= matchList[6] %> &nbsp;</a></li>
-        <li><a href="/profile" target="_blank"><%= matchList[7] %> &nbsp;</a></li>
-        <li><a href="/profile" target="_blank"><%= matchList[8] %> &nbsp;</a></li>
-        <li><a href="/profile" target="_blank"><%= matchList[9] %> &nbsp;</a></li>
-        </ol>
+        <form action="/match" method="post" target="_blank">
+            <ol>
+            <li><button type="submit" name="match" value="<%= matchList[0] %>"><a><%= matchList[0] %> &nbsp;</a></button></li>
+            <li><button type="submit" name="match" value="<%= matchList[1] %>"><a><%= matchList[1] %> &nbsp;</a></button></li>
+            <li><button type="submit" name="match" value="<%= matchList[2] %>"><a><%= matchList[2] %> &nbsp;</a></button></li>
+            <li><button type="submit" name="match" value="<%= matchList[3] %>"><a><%= matchList[3] %> &nbsp;</a></button></li>
+            <li><button type="submit" name="match" value="<%= matchList[4] %>"><a><%= matchList[4] %> &nbsp;</a></button></li>
+            <li><button type="submit" name="match" value="<%= matchList[5] %>"><a><%= matchList[5] %> &nbsp;</a></button></li>
+            <li><button type="submit" name="match" value="<%= matchList[6] %>"><a><%= matchList[6] %> &nbsp;</a></button></li>
+            <li><button type="submit" name="match" value="<%= matchList[7] %>"><a><%= matchList[7] %> &nbsp;</a></button></li>
+            <li><button type="submit" name="match" value="<%= matchList[8] %>"><a><%= matchList[8] %> &nbsp;</a></button></li>
+            <li><button type="submit" name="match" value="<%= matchList[9] %>"><a><%= matchList[9] %> &nbsp;</a></button></li>
+            </ol>
+        </form>
         </li>
         </ol>
     </div>

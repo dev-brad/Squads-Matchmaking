@@ -93,3 +93,14 @@ li {
 .shadow-none {
   box-shadow: none !important;
 }
+
+.tm-btn {
+  all: unset;
+  width: 100%;
+  margin: -3px 0;
+  cursor: pointer;
+}
+
+.tm-btn:focus {
+  outline: none;
+}

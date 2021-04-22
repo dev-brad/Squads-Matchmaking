@@ -32,7 +32,7 @@
   },
   "scripts": {
     "test": "protractor conf.js",
-    "unit": "mocha ./test/unit-tests",
+    "unit": "mocha ./test/unit-tests --exit",
     "dev": "nodemon server.js"
   },
   "repository": {

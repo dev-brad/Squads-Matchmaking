@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/user-profile.css">
-    <title>Profile Page</title>
+    <link rel="stylesheet" href="../css/user-profile.css">
+    <title><%= squadsName %> Profile</title>
   </head>
   <body>
     <div class="container">
@@ -26,80 +26,73 @@
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex flex-column align-items-center text-center">
-                        <img src="images/default-profile-pic.jpeg" alt="profie pic" class="rounded-circle" width="150">
-                        <div class="mt-3">
-                          <h4>@<%= squadsName %></h4>
-                          <form action="/signout?_method=DELETE" method="POST">
-                            <button type="submit" class="btn btn-primary">Logout</button>
-                          </form>
-                        </div>
-                        <div class="mt-3">
-                          <form action="/createSquad/" method="get">
-                            <button class="btn btn-primary">Create Squads</button>
-                          </form>
-                        </div>
-                        <% if (fortniteName) { %>
-                        <div class="mt-3">
-                          <form action="/match/fortnite" method="get">
-                            <button class="btn btn-primary">Find Fortnite Teammates</button>
-                          </form>
-                        </div>
-                        <% } else { %>
-                        <div class="mt-3">
-                          <form action="/profile" method="get">
-                            <button class="btn btn-primary">Link Fortnite Account</button>
-                          </form>
-                        </div>
-                        <% } %>
+                        <% if (mainUser === 'Y') { %>
+                          <img src="images/default-profile-pic.jpeg" alt="profile pic" class="rounded-circle" width="150">
+                          <div class="mt-3">
+                            <h4>@<%= squadsName %></h4>
+                            <form action="/signout" method="get">
+                              <button type="submit" class="btn btn-primary">Logout</button>
+                            </form>
+                          </div>
 
-                        <% if (apexName) { %>
-                        <div class="mt-3">
-                          <form action="/match/apex-legends" method="get">
-                            <button class="btn btn-primary">Find Apex Legends Teammates</button>
-                          </form>
-                        </div>
-                        <% } else { %>
-                        <div class="mt-3">
-                          <form action="/profile" method="get">
-                            <button class="btn btn-primary">Link Apex Legends Account</button>
-                          </form>
-                        </div>
-                        <% } %>
-                        
-                        
-                        
+                          <% if (fortniteName) { %>
+                          <div class="mt-3">
+                            <form action="/match/fortnite" method="get">
+                              <button class="btn btn-primary">Find Fortnite Teammates</button>
+                            </form>
+                          </div>
+                          <% } else { %>
+                          <div class="mt-3">
+                            <form action="/profile" method="get">
+                              <button class="btn btn-primary">Link Fortnite Account</button>
+                            </form>
+                          </div>
+                          <% } %>
 
-                        <div class="mt-3 requests">
-                          <h4>Teammate Requests</h4>
-                          <form action="/profile" method="post">
+                          <% if (apexName) { %>
+                          <div class="mt-3">
+                            <form action="/match/apex-legends" method="get">
+                              <button class="btn btn-primary">Find Apex Legends Teammates</button>
+                            </form>
+                          </div>
+                          <% } else { %>
+                          <div class="mt-3">
+                            <form action="/profile" method="get">
+                              <button class="btn btn-primary">Link Apex Legends Account</button>
+                            </form>
+                          </div>
+                          <% } %>
+
+                          <div class="mt-3 requests">
+                            <h4>Teammate Requests</h4>
+                            <form action="/profile" method="post">
+                              <ul>
+                              <% if (friendRequests.length > 0) { %>
+                              <% for (var i = 0; friendRequests.length > i; i++) { %>
+                                <li>@<%= friendRequests[i].fromName %></li>
+                                <button type="submit" name="accept" value="<%= friendRequests[i].fromName %>" class="btn btn-success btn-sm">Accept</button>
+                                <button type="submit" name="reject" value="<%= friendRequests[i].fromName %>" class="btn btn-light btn-sm">Reject</button>
+                              <% }} else { %>
+                                <li>No current teammate requests.</li>
+                              <% } %>
+                              </ul>
+                            </form>
+                          </div>
+  
+                          <div class="mt-3 friends">
+                            <h4>Teammates</h4>
                             <ul>
-                            <% if (friendRequests.length > 0) { %> 
-                            <% for (var i = 0; friendRequests.length > i; i++) { %> 
-                              <li>@<%= friendRequests[i].fromName %> </li>
-                              <button type="submit" name="accept" value="<%= friendRequests[i].fromName %>"" class="btn btn-success btn-sm">Accept</button>
-                              <button type="submit" name="reject" value="<%= friendRequests[i].fromName %>" class="btn btn-light btn-sm">Reject</button>
-                            <% }} else { %> 
-                              <li>No current teammate requests.</li>
-                            <% } %> 
+                            <% if (friends.length > 0) { %>
+                            <% for (var i = 0; friends.length > i; i++) { %>
+                              <form action="/match" method="post" target="_blank">
+                                <li><button type="submit" name="match" value="<%= friends[i].friendName %>" class="tm-btn">@<%= friends[i].friendName %></button></li>
+                              </form>
+                            <% }} else { %>
+                              <li>No teammates yet! Click buttons above to link account or find teammates.</li>
+                            <% } %>
                             </ul>
-                          </form>
-                        </div>
-
-                        <div class="mt-3 friends">
-                          <h4>Teammates</h4>
-                          <ul>
-                          <% if (friends.length > 0) { %> 
-                          <% for (var i = 0; friends.length > i; i++) { %> 
-                            <li>@<%= friends[i].friendName %> </li>
-                          <% }} else { %> 
-                            <li>No teammates yet! Click buttons above to link account or find teammates.</li>
-                          <% } %> 
-                          </ul>
-                        </div>
-
-
-
-
+                          </div>
+  
                           <div class="mt-3 friends">
                           <h4>Squads</h4>
                           <ul>
@@ -108,13 +101,38 @@
                             <li>@<%= teams[i] %> </li>
                           <% }} else { %> 
                             <li>No Squads yet! Click create squad above to create a squad.</li>
-                          <% } %> 
+                          <% } %>
                           </div>
 
+                        <% } else { %>
+                          <img src="../images/default-profile-pic.jpeg" alt="profile pic" class="rounded-circle" width="150">
+                          <div class="mt-3">
+                            <h4>@<%= squadsName %></h4>
+                          </div>
 
+                          <% let friend = friends.filter(x => x.friendName === mainUserName) %>  
+                          <% if (friend.length === 0) { %>
+                          <div class="mt-3">
+                            <form action="/profile/match" method="post">
+                              <button class="btn btn-primary">Send Teammate Request</button>
+                            </form>
+                          </div>
+                          <% } %> 
 
-
-
+                          <div class="mt-3 friends">
+                            <h4>Teammates</h4>
+                            <ul>
+                            <% if (friends.length > 0) { %>
+                            <% for (var i = 0; friends.length > i; i++) { %>
+                              <form action="/match" method="post" target="_blank">
+                                <li><button type="submit" name="match" value="<%= friends[i].friendName %>" class="tm-btn">@<%= friends[i].friendName %></button></li>
+                              </form>
+                            <% }} else { %>
+                              <li>This user does not have any teammates yet. Click above to send them a request!</li>
+                            <% } %>
+                            </ul>
+                          </div> 
+                        <% } %>
                       </div>
                     </div>
                   </div>
