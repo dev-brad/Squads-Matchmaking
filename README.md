@@ -10,6 +10,49 @@
 
 ---
 
+# Sprint 3
+
+## Story Points Forecast
+In Sprints 1 & 2, the team completed 14 story points which, which included 12 tasks each. The story points were completed just in time for review both times, but the team felt that we could continue at that velocity for Sprint 3. So a total of 14 story points was again forecast for Sprint 3, which this time totaled 20 tasks due to the increased complexity of the additional functionality.
+
+## [Sprint Backlog and Kanban Board](https://trello.com/b/qfcXvM8Z)
+
+## Burndown Chart 
+(by # of tasks to complete our 14 story points)
+![Sprint 3 Burndown Chart](https://github.com/dev-brad/Squads-Matchmaking/blob/ddc3a9777cd1221682d5b4ef832e473a9fa4f1f3/readme-images/Sprint%203%20Burndown%20Chart.PNG)
+
+## [Daily Scrum Notes](https://kennesawedu-my.sharepoint.com/:w:/g/personal/bgriff77_students_kennesaw_edu/EbXHWtoPGc1KuPcfTJhNF4IBxTecQ0nlukg995JUoZRA0A?e=Y4BA4a)
+
+## Paired Programming Sessions
+* [Working Toward Teammate and Squads Process Development (Brad + Marcus)](https://web.microsoftstream.com/video/6be547d5-28a1-4fd3-9437-ab8e592b359a)
+* [Working on User Profile Template to View Other Gamers' Profiles (Brad + Matthew)(https://web.microsoftstream.com/video/5ff87f04-96fc-47cd-adb5-2f20367c524d)
+
+## Test Suites
+### Unit Tests
+![Unit Tests](https://github.com/dev-brad/Squads-Matchmaking/blob/ddc3a9777cd1221682d5b4ef832e473a9fa4f1f3/readme-images/Squads%20Sprint%203%20Unit%20Tests.PNG)
+### UAT Tests
+[UAT Tests](https://github.com/dev-brad/Squads-Matchmaking/blob/3c25e49ff862ecd663f6e02c83cd81527ee7524b/readme-images/IMG_7744.PNG)
+### CI & CD Testing
+We used Buddy CI tool to run unit tests when code is merged from our Dev GitHub branch to our Master GitHub branch. We are hosting the application in Heroku where we have test and production pipelines. The test pipeline builds automatically when code is merged to the Master GitHub branch. We were not able to set up CD for the Heroku production pipeline due to an issue running MongoDB within Heroku (the add-on for MongoDB seems to be discontinued). However, we were able to manually test in our test pipeline before promoting code to production at the end of each Sprint.
+#### Buddy CI
+![Buddy CI Overview](https://github.com/dev-brad/Squads-Matchmaking/blob/ddc3a9777cd1221682d5b4ef832e473a9fa4f1f3/readme-images/Buddy%20CI%20overview.PNG)
+![Buddy CI Detail](https://github.com/dev-brad/Squads-Matchmaking/blob/ddc3a9777cd1221682d5b4ef832e473a9fa4f1f3/readme-images/Buddy%20CI%20detail.PNG)
+#### Heroku Pipeline
+![Heroku Pipeline](https://github.com/dev-brad/Squads-Matchmaking/blob/ddc3a9777cd1221682d5b4ef832e473a9fa4f1f3/readme-images/Heroku%20pipeline.PNG)
+
+## Sprint Review Meeting
+[Sprint 2 Review Meeting](https://web.microsoftstream.com/video/94796f13-5fec-4693-8fd5-92aa095fc73c)
+
+## [Working Prototype: Squads Matchmaking](https://squads-matchmaking.herokuapp.com/index)
+
+### Increment includes:
+* Minor Edit to User Preference Form
+* Ability to View Other User Profiles
+* Ability to Send, Accept, and Reject Teammate Requests
+* Ability to Form Teams with One or More Teammates
+
+---
+
 # Sprint 2
 
 ## Story Points Forecast
