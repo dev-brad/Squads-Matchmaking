@@ -41,7 +41,7 @@ We used Buddy CI tool to run unit tests when code is merged from our Dev GitHub 
 ![Heroku Pipeline](https://github.com/dev-brad/Squads-Matchmaking/blob/ddc3a9777cd1221682d5b4ef832e473a9fa4f1f3/readme-images/Heroku%20pipeline.PNG)
 
 ## Sprint Review Meeting
-### [Sprint 2 Review Meeting](https://web.microsoftstream.com/video/94796f13-5fec-4693-8fd5-92aa095fc73c)
+### [Sprint 3 Review Meeting](https://web.microsoftstream.com/video/94796f13-5fec-4693-8fd5-92aa095fc73c)
 
 ## [Working Prototype: Squads Matchmaking](https://squads-matchmaking.herokuapp.com/index)
 
