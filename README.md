@@ -13,7 +13,7 @@
 # Sprint 3
 
 ## Story Points Forecast
-In Sprints 1 & 2, the team completed 14 story points which, which included 12 tasks each. The story points were completed just in time for review both times, but the team felt that we could continue at that velocity for Sprint 3. So a total of 14 story points was again forecast for Sprint 3, which this time totaled 20 tasks due to the increased complexity of the additional functionality.
+In Sprints 1 & 2, the team completed 14 story points each, which included 12 tasks each. The story points were completed just in time for review both times, but the team felt that we could continue at that velocity for Sprint 3. So a total of 14 story points was again forecast for Sprint 3, which this time totaled 20 tasks due to the increased complexity of the additional functionality.
 
 ## [Sprint Backlog and Kanban Board](https://trello.com/b/qfcXvM8Z)
 
@@ -25,13 +25,13 @@ In Sprints 1 & 2, the team completed 14 story points which, which included 12 ta
 
 ## Paired Programming Sessions
 * [Working Toward Teammate and Squads Process Development (Brad + Marcus)](https://web.microsoftstream.com/video/6be547d5-28a1-4fd3-9437-ab8e592b359a)
-* [Working on User Profile Template to View Other Gamers' Profiles (Brad + Matthew)(https://web.microsoftstream.com/video/5ff87f04-96fc-47cd-adb5-2f20367c524d)
+* [Working on User Profile Template to View Other Gamers' Profiles (Brad + Matthew)](https://web.microsoftstream.com/video/5ff87f04-96fc-47cd-adb5-2f20367c524d)
 
 ## Test Suites
 ### Unit Tests
 ![Unit Tests](https://github.com/dev-brad/Squads-Matchmaking/blob/ddc3a9777cd1221682d5b4ef832e473a9fa4f1f3/readme-images/Squads%20Sprint%203%20Unit%20Tests.PNG)
 ### UAT Tests
-[UAT Tests](https://github.com/dev-brad/Squads-Matchmaking/blob/3c25e49ff862ecd663f6e02c83cd81527ee7524b/readme-images/IMG_7744.PNG)
+![UAT Tests](https://github.com/dev-brad/Squads-Matchmaking/blob/3c25e49ff862ecd663f6e02c83cd81527ee7524b/readme-images/IMG_7744.PNG)
 ### CI & CD Testing
 We used Buddy CI tool to run unit tests when code is merged from our Dev GitHub branch to our Master GitHub branch. We are hosting the application in Heroku where we have test and production pipelines. The test pipeline builds automatically when code is merged to the Master GitHub branch. We were not able to set up CD for the Heroku production pipeline due to an issue running MongoDB within Heroku (the add-on for MongoDB seems to be discontinued). However, we were able to manually test in our test pipeline before promoting code to production at the end of each Sprint.
 #### Buddy CI
@@ -41,7 +41,7 @@ We used Buddy CI tool to run unit tests when code is merged from our Dev GitHub 
 ![Heroku Pipeline](https://github.com/dev-brad/Squads-Matchmaking/blob/ddc3a9777cd1221682d5b4ef832e473a9fa4f1f3/readme-images/Heroku%20pipeline.PNG)
 
 ## Sprint Review Meeting
-[Sprint 2 Review Meeting](https://web.microsoftstream.com/video/94796f13-5fec-4693-8fd5-92aa095fc73c)
+### [Sprint 2 Review Meeting](https://web.microsoftstream.com/video/94796f13-5fec-4693-8fd5-92aa095fc73c)
 
 ## [Working Prototype: Squads Matchmaking](https://squads-matchmaking.herokuapp.com/index)
 
@@ -73,7 +73,9 @@ In Sprint 1 the team completed 14 story points, which included 13 tasks. The sto
 ### Unit Tests
 ![Unit Tests](https://github.com/dev-brad/Squads-Matchmaking/blob/decfefe28f1b111c625531d74c12696e8a376b3d/readme-images/Squads%20Sprint%202%20Unit%20Tests.PNG)
 ### CI & CD Testing
-We have tried a couple of different tools looking for one to work well with NodeJS. This is still in progress.
+We have tried a couple of different CI tools looking for one to work well with NodeJS. This is still in progress. We are hosting the application in Heroku where we have test and production pipelines. The test pipeline builds automatically when code is merged to the Master GitHub branch. We were not able to set up CD for the Heroku production pipeline due to an issue running MongoDB within Heroku (the add-on for MongoDB seems to be discontinued). However, we were able to manually test in our test pipeline before promoting code to production at the end of each Sprint.
+#### Heroku Pipeline
+![Heroku Pipeline](https://github.com/dev-brad/Squads-Matchmaking/blob/ff5b52b7c7f63b84906e14690a6c9625f9431970/readme-images/Heroku%20pipeline.PNG)
 
 ## Sprint Review & Retrospective Meeting
 For some reason, our recording of our Review meeting for Sprint 2 did not post and become available. Below is a screen capture of our meeting.
