@@ -1,8 +1,8 @@
-# Squads Matchmaking
+# Squads Matchmaking - KSU Group Project
 
 ## Scrum Team
 * Dickson Diku - Product Owner
-* Brad Griffith - Scrum Master
+* Brad Griffith - Scrum Master/Lead Developer
 * Halil Gunduz - Developer/Tester 
 * Matthew Parker - Developer
 * Marcus Dorsey - Developer 
